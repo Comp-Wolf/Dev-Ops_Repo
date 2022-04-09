@@ -44,12 +44,13 @@ data "aws_ami" "tf_ami" {
 resource "aws_instance" "tf-ec2" {
   ami           = data.aws_ami.tf_ami.id
   instance_type = var.ec2-type
-  key_name      = "mk"
+  key_name      = "comp-wolf"
   tags = {
     Name = "${local.mytag}-this is from my-ami"
   }
 }
 ```
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html
 
 ```bash
 terraform plan
@@ -255,7 +256,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "~>4.0"
+      version = "4.8.0"
     }
   }
 }
