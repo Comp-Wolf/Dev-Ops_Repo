@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "tf-remote-state" {
-  bucket = "tf-remote-s3-bucket-murat"
+  bucket = "tf-remote-s3-bucket-comp-wolf"
 
   force_destroy = true # Normally it must be false. Because if we delete s3 mistakenly, we lost all of the states.
 }
