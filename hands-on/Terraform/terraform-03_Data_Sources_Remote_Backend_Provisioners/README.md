@@ -43,8 +43,8 @@ data "aws_ami" "tf_ami" {
 
 resource "aws_instance" "tf-ec2" {
   ami           = data.aws_ami.tf_ami.id
-  instance_type = var.ec2-type
-  key_name      = "comp-wolf"
+  instance_type = var.ec2_type
+  key_name      = "mk"
   tags = {
     Name = "${local.mytag}-this is from my-ami"
   }
@@ -256,7 +256,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "4.8.0"
+      version = "~>4.0"
     }
   }
 }
