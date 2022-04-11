@@ -79,7 +79,7 @@ resource "aws_subnet" "private_subnet" {
 
 ```go
 variable "environment" {
-  default = "oliver"
+  default = "comp-wolf"
 }
 
 variable "vpc_cidr_block" {
@@ -235,7 +235,7 @@ resource "aws_instance" "tf-instances" {
   ami = element(var.tf-ami, count.index )
   instance_type = "t2.micro"
   count = 3
-  key_name = "oliver"
+  key_name = "comp-wolf"
   security_groups = ["tf-import-sg"]
   tags = {
     Name = element(var.tf-tags, count.index )
