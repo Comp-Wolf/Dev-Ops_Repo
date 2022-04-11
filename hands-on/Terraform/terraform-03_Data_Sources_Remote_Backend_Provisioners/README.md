@@ -82,7 +82,7 @@ terraform destroy
     s3-backend
        └── backend.tf
     terraform-aws
-       ├── oliver.tfvars
+       ├── comp-wolf.tfvars
        ├── main.tf
        └── variables.tf
 
@@ -154,7 +154,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "tf-remote-s3-bucket-oliver-changehere"
+    bucket = "tf-remote-s3-bucket-comp-wolf-changehere"
     key = "env/dev/tf-remote-backend.tfstate"
     region = "us-east-1"
     dynamodb_table = "tf-s3-app-lock"
@@ -268,7 +268,7 @@ provider "aws" {
 resource "aws_instance" "instance" {
   ami = "ami-0c02fb55956c7d316"
   instance_type = "t2.micro"
-  key_name = "oliver"
+  key_name = "comp-wolf"
   security_groups = ["tf-provisioner-sg"]
   tags = {
     Name = "terraform-instance-with-provisioner"
@@ -283,7 +283,7 @@ resource "aws_instance" "instance" {
     host = self.public_ip
     type = "ssh"
     user = "ec2-user"
-    private_key = file("~/oliver.pem")
+    private_key = file("~/comp-wolf.pem")
   }
 
   provisioner "remote-exec" {
