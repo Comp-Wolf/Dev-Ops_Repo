@@ -1,2 +1,0 @@
-make sure you point to your own github account
-replace key name
