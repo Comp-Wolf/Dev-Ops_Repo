@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
-      version = "3.57.0"
+      version = "4.9.0"
     }
   }
 }
@@ -48,11 +48,11 @@ resource "aws_security_group" "allow_ssh" {
 resource "aws_instance" "tf-ec2" {
   ami           = "ami-087c17d1fe0178315"
   instance_type = var.instance-type
-  key_name = "tyler-team"
+  key_name = "erdogan"
   vpc_security_group_ids = [ aws_security_group.allow_ssh.id ]
   iam_instance_profile = "terraform"
       tags = {
-      Name = "Docker-engine"
+      Name = "Docker-comp-wolf"
   }
 
   user_data = <<-EOF
@@ -62,6 +62,7 @@ resource "aws_instance" "tf-ec2" {
               systemctl start docker
               systemctl enable docker
               usermod -a -G docker ec2-user
+              newgrp docker
               # install docker-compose
               sudo
               -o /usr/local/bin/docker-compose
