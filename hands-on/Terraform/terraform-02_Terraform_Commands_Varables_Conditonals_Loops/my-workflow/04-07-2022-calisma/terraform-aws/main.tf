@@ -36,3 +36,5 @@ output "tf_example_private_ip" {
 output "tf-example-s3" {
   value = aws_s3_bucket.tf-s3[*]
 }
+
+resource =
