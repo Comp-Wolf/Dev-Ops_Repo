@@ -120,8 +120,8 @@ docker search ubuntu
 - Create a folder to hold all files necessary for creating Docker image.
 
 ```bash
-mkdir clarusway_web
-cd clarusway_web
+mkdir compwolf_web
+cd compwolf_web
 ```
 
 - Create application code and save it to file, and name it `welcome.py`
@@ -132,7 +132,7 @@ from flask import Flask
 app = Flask(__name__)
 @app.route("/")
 def hello():
-    return "<h1>Welcome to Clarusway</h1>"
+    return "<h1>Welcome to compwolf</h1>"
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80)
 ' > welcome.py
@@ -154,14 +154,14 @@ CMD python3 ./welcome.py
 - Build Docker image from Dockerfile locally, tag it as `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>:<Tag>` and explain steps of building. Note that repo name is the combination of `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>`.
 
 ```bash
-docker build -t "clarusway/flask-app:1.0" .
+docker build -t "compwolf/flask-app:1.0" .
 docker image ls
 ```
 
 - Run the newly built image as container in detached mode, connect host `port 80` to container `port 80`, and name container as `welcome`. Then list running containers and connect to EC2 instance from the browser to show the Flask app is running.
 
 ```bash
-docker run -d --name welcome -p 80:80 clarusway/flask-app:1.0
+docker run -d --name welcome -p 80:80 compwolf/flask-app:1.0
 docker container ls
 ```
 
@@ -174,7 +174,7 @@ docker login
 - Push newly built image to Docker Hub, and show the updated repo on Docker Hub.
 
 ```bash
-docker push clarusway/flask-app:1.0
+docker push compwolf/flask-app:1.0
 ```
 
 - This time, we reduce the size of image.
@@ -193,16 +193,16 @@ CMD python ./welcome.py
 - Build Docker image from Dockerfile locally, tag it as `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>:<Tag>` and explain steps of building. Note that repo name is the combination of `<Your_Docker_Hub_Account_Name>/<Your_Image_Name>`.
 
 ```bash
-docker build -t "clarusway/flask-app:2.0" -f ./Dockerfile-alpine . 
+docker build -t "compwolf/flask-app:2.0" -f ./Dockerfile-alpine . 
 docker image ls
 ```
 
-- Note that while the size of `clarusway/flask-app:1.0` is approximately 400MB, the size of `clarusway/flask-app:2.0` is 56MB.
+- Note that while the size of `compwolf/flask-app:1.0` is approximately 400MB, the size of `compwolf/flask-app:2.0` is 56MB.
 
 - Run the newly built image as container in detached mode, connect host `port 80` to container `port 80`, and name container as `welcome`. Then list running containers and connect to EC2 instance from the browser to show the Flask app is running.
 
 ```bash
-docker run -d --name welcome -p 8080:80 clarusway/flask-app:2.0
+docker run -d --name welcome -p 8080:80 compwolf/flask-app:2.0
 docker ps
 ```
 
@@ -215,13 +215,13 @@ docker stop welcome && docker rm welcome
 - Push newly built image to Docker Hub, and show the updated repo on Docker Hub.
 
 ```bash
-docker push clarusway/flask-app:2.0
+docker push compwolf/flask-app:2.0
 ```
 
 - We can also tag the same image with different tags.
 
 ```bash
-docker image tag clarusway/flask-app:2.0 clarusway/flask-app:latest
+docker image tag compwolf/flask-app:2.0 compwolf/flask-app:latest
 ```
 
 - Delete image with `image id` locally.
