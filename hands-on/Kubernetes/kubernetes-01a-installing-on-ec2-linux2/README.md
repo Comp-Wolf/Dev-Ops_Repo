@@ -87,11 +87,11 @@ bash
 - Install helper packages for Kubernetes.
 
 ```bash
-sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
+sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2  #-->>kubernetis paketlerini indirmek için yardımcı kodu<<--
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list  # -->>kubernet için bir liste üretiyor<<--
 ```
 
 - Update app repository and install Kubernetes packages and Docker.
@@ -134,7 +134,7 @@ sudo sysctl --system
 - Pull the packages for Kubernetes beforehand
 
 ```bash
-sudo kubeadm config images pull
+sudo kubeadm config images pull  # -->>kubernetimizi kurmamıza yardımcı oluyor<<--
 ```
 
 - By default, the Kubernetes cgroup driver is set to system, but docker is set to systemd. We need to change the Docker cgroup driver by creating a configuration file `/etc/docker/daemon.json` and adding the following line then restart deamon, docker and kubelet:
@@ -254,8 +254,7 @@ sudo systemctl restart kubelet
 - Log into worker nodes and run `sudo kubeadm join...` command to have them join the cluster.
 
 ```bash
-sudo kubeadm join 172.31.3.109:6443 --token 1aiej0.kf0t4on7c7bm2hpa \
-    --discovery-token-ca-cert-hash sha256:0e2abfb56733665c0e6204217fef34be2a4f3c4b8d1ea44dff85666ddf722c02
+sudo kubeadm join 172.31.3.109:6443 --token 1aiej0.kf0t4on7c7bm2hpa --discovery-token-ca-cert-hash sha256:0e2abfb56733665c0e6204217fef34be2a4f3c4b8d1ea44dff85666ddf722c02
 ```
 
 - Go to the master node. Get the list of nodes. Now, we should see the new worker nodes in the list.
@@ -269,6 +268,8 @@ kubectl get nodes
 ```bash
 kubectl get nodes -o wide
 ```
+
+
 
 ## Part 4 - Deploying a Simple Nginx Server on Kubernetes
 
@@ -342,9 +343,9 @@ kubectl get pods
 
   ```bash
   kubectl get nodes
-  kubectl drain kube-worker-1 --ignore-daemonsets --delete-emptydir-data
   kubectl cordon kube-worker-1
   kubectl delete node kube-worker-1
+  kubectl drain kube-worker-1 --ignore-daemonsets --delete-emptydir-data
   ```
 
   - Remove and reset settings on the worker node.
