@@ -1,3 +1,3 @@
-# DevOps Session Class-notes
+# DevOps Session Class-notes.
 
 
