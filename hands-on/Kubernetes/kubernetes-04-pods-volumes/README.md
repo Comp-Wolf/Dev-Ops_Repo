@@ -76,9 +76,8 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ubuntu/pv-data"
-EQF
+EOF
 ```
-
 - Create the PersistentVolume `clarus-pv-vol`.
 
 ```bash
