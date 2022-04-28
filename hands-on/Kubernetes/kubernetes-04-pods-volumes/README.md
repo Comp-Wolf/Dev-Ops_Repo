@@ -61,6 +61,7 @@ mkdir volume-lessons && cd volume-lessons
 - Create a `clarus-pv.yaml` file using the following content with the volume type of `hostPath` to build a `PersistentVolume` and explain fields.
 
 ```yaml
+cat << EOF > clarus-pv.yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -75,6 +76,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/home/ubuntu/pv-data"
+EQF
 ```
 
 - Create the PersistentVolume `clarus-pv-vol`.
