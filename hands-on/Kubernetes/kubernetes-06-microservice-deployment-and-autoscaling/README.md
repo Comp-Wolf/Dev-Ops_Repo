@@ -1,8 +1,8 @@
-# Hands-on Kubernetes-04 : Deploying Microservices and Service Level Autoscaling
+# Hands-on Kubernetes-04 : Deploying Microservices and Service Level Autoscaling.
 
 Purpose of the this hands-on training is to give students the knowledge of  Autoscaling and Microservices
 
-## Learning Outcomes
+# # Learning Outcomes
 
 At the end of the this hands-on training, students will be able to;
 
