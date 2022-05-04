@@ -2,7 +2,7 @@
 
 Purpose of this hands-on training is to give students the knowledge of Kubernetes Volumes.
 
-## Learning Outcomes
+# # Learning Outcomes
 
 At the end of the this hands-on training, students will be able to;
 
@@ -10,7 +10,7 @@ At the end of the this hands-on training, students will be able to;
 
 - Learn `Persistent Volumes` and `Persistent Volume Claims`.
 
-## Outline
+# # Outline
 
 - Part 1 - Setting up the Kubernetes Cluster
 
