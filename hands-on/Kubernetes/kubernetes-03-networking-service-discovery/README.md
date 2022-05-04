@@ -2,7 +2,7 @@
 
 Purpose of this hands-on training is to give students the knowledge of Kubernetes Services.
 
-## Learning Outcomes
+# # Learning Outcomes
 
 At the end of the this hands-on training, students will be able to;
 
@@ -12,7 +12,7 @@ At the end of the this hands-on training, students will be able to;
 
 - Learn different types of Services in Kubernetes.
 
-## Outline
+# # Outline
 
 - Part 1 - Setting up the Kubernetes Cluster
 
