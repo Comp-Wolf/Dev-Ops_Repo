@@ -2,7 +2,7 @@
 
 Purpose of the this hands-on training is to give students the knowledge of basic operations in Kubernetes cluster.
 
-# # Learning Outcomes
+## Learning Outcomes
 
 At the end of the this hands-on training, students will be able to;
 
