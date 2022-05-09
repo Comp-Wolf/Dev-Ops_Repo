@@ -331,6 +331,7 @@ git init
 git remote add origin <origin-url>
 git config core.sparseCheckout true
 echo "subdirectory/under/repo/" >> .git/info/sparse-checkout  # do not put the repository folder name in the beginning
+(echo "/hands-on/Kubernetes/eks-02-DynamicVolumeProvisionining-and-Ingress/" >> .git/info/sparse-checkout)
 git pull origin <branch-name>
 ```
 
