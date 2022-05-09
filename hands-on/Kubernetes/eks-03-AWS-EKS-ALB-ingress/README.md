@@ -45,7 +45,7 @@ sudo yum update -y
 - Install git.
 
 ```bash
-sudo yum install git
+sudo yum install git -y
 ```
 
 - Install helm.
@@ -120,7 +120,7 @@ aws configure
 ```bash
 
 eksctl create cluster \
- --name mycluster \
+ --name comp-wolf-cluster \
  --version 1.22 \
  --region us-east-1 \
  --zones us-east-1a,us-east-1b,us-east-1c \
@@ -161,7 +161,7 @@ curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-lo
 
 ```bash
 aws iam create-policy \
-    --policy-name AWSLoadBalancerControllerIAMPolicy \
+    --policy-name AWSLoadBalancerControllerIAMPolicyWOLF \
     --policy-document file://iam_policy.json
 ```
 
