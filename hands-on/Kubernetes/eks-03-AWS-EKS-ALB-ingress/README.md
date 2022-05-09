@@ -166,15 +166,16 @@ aws iam create-policy \
 ```
 
 - Create an IAM role. Create a Kubernetes service account named aws-load-balancer-controller in the kube-system namespace for the AWS Load Balancer Controller and annotate the Kubernetes service account with the name of the IAM role.
-- Replace my-cluster with the name of your cluster, 111122223333 with your account ID, and then run the command.
+- Replace comp-wolf-cluster with the name of your cluster, 111122223333 with your account ID, and then run the command.
 
 ```bash
 eksctl create iamserviceaccount \
-  --cluster=my-cluster \
+  --cluster=comp-wolf-cluster \
+  --region=us-east-1 \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
-  --attach-policy-arn=arn:aws:iam::111122223333:policy/AWSLoadBalancerControllerIAMPolicy \
+  --attach-policy-arn=arn:aws:iam::210785755454:policy/AWSLoadBalancerControllerIAMPolicyWolf \
   --approve
 ```
 
@@ -189,14 +190,14 @@ eksctl create iamserviceaccount \
 - Solution to this error provide the command below:
 
 ```bash
-eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=mycluster --approve
+eksctl utils associate-iam-oidc-provider --region=us-east-1 --cluster=comp-wolf-cluster --approve
 ```
 
 - You shoulD provide the last command again in order to create IAM service account:
 
 ```bash
 eksctl create iamserviceaccount \
-  --cluster=my-cluster \
+  --cluster=comp-wolf-cluster \
   --namespace=kube-system \
   --name=aws-load-balancer-controller \
   --role-name "AmazonEKSLoadBalancerControllerRole" \
