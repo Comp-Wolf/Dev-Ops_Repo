@@ -135,36 +135,36 @@ helm uninstall mysql-release
 - Create a new chart with following command.
 
 ```bash
-helm create comp-wolf-chart
+helm create clarus-chart
 ```
 
-- See the files of comp-wolf-chart.
+- See the files of clarus-chart.
 
 ```bash
-ls comp-wolf-chart
+ls clarus-chart
 ```
 
 - Remove the files from `templates` folder.
 
 ```bash
-rm -rf comp-wolf-chart/templates/*
+rm -rf clarus-chart/templates/*
 ```
 
-- Create a `configmap.yaml` file under `comp-wolf-chart/templates` folder with following content.
+- Create a `configmap.yaml` file under `clarus-chart/templates` folder with following content.
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: comp-wolf-chart-config
+  name: clarus-chart-config
 data:
   myvalue: "Hello World"
 ```
 
-- Install the comp-wolf-chart.
+- Install the clarus-chart.
 
 ```bash
-helm install helm-demo comp-wolf-chart
+helm install helm-demo clarus-chart
 ```
 
 - The output is similar to:
@@ -188,7 +188,7 @@ helm ls
 
 ```bash
 kubectl get cm
-kubectl describe cm comp-wolf-chart-config
+kubectl describe cm clarus-chart-config
 ```
 
 - Remove the release.
@@ -197,34 +197,34 @@ kubectl describe cm comp-wolf-chart-config
 helm uninstall helm-demo
 ```
 
-- Let's create our own values and use it within the template. Update the `comp-wolf-chart/values.yaml` as below.
+- Let's create our own values and use it within the template. Update the `clarus-chart/values.yaml` as below.
 
 ```yaml
 course: DevOps
 ```
 
-- Edit the comp-wolf-chart/templates/configmap.yaml as below.
+- Edit the clarus-chart/templates/configmap.yaml as below.
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: comp-wolf-chart-config
+  name: clarus-chart-config
 data:
-  myvalue: "comp-wolf-chart configmap example"
+  myvalue: "clarus-chart configmap example"
   course: {{ .Values.course }}
 ``` 
 
 - Let's see how the values are getting substituted with the `dry-run` option.
 
 ```bash
-helm install --debug --dry-run mydryrun comp-wolf-chart
+helm install --debug --dry-run mydryrun clarus-chart
 ```
 
-- Install the comp-wolf-chart.
+- Install the clarus-chart.
 
 ```bash
-helm install myvalue comp-wolf-chart
+helm install myvalue clarus-chart
 ```
 
 - Check the values that got deployed with the following command.
@@ -242,40 +242,12 @@ helm uninstall myvalue
 - Let's change the default value from the values.yaml file when the release is getting released.
 
 ```bash
-helm install --debug --dry-run setflag comp-wolf-chart --set course=AWS
+helm install --debug --dry-run setflag clarus-chart --set course=AWS
 ```
 
-<<<<<<< HEAD
-- Install the comp-wolf-chart.
-
-```bash
-helm install setflag comp-wolf-chart --set course=AWS
-```
-
-- Check the values that got deployed with the following command.
-
-```bash
-helm get manifest setflag
-```
-
-- Check the configmap.
-
-```bash
-kubectl get cm
-kubectl describe cm comp-wolf-chart-config
-```
-
-- Remove the release.
-
-```bash
-helm uninstall setflag
-```
-
-=======
->>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 - We can also get values with built-in objects. Objects can be simple and have just one value. Or they can contain other objects or functions. For example. the Release object contains several objects (like Release.Name) and the Files object has a few functions.
 
-- Edit the comp-wolf-chart/templates/configmap.yaml as below.
+- Edit the clarus-chart/templates/configmap.yaml as below.
 
 ```yaml
 apiVersion: v1
@@ -283,17 +255,17 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
-  myvalue: "comp-wolf-chart configmap example"
+  myvalue: "clarus-chart configmap example"
   course: {{ .Values.course }}
 ``` 
 
 - Let's see how the values are getting substituted with the `dry-run` option.
 
 ```bash
-helm install --debug --dry-run builtin-object comp-wolf-chart
+helm install --debug --dry-run builtin-object clarus-chart
 ```
 
-- Let's try more examples to get more clarity. Update the `comp-wolf-chart/values.yaml` as below.
+- Let's try more examples to get more clarity. Update the `clarus-chart/values.yaml` as below.
 
 ```yaml
 course: DevOps
@@ -301,53 +273,11 @@ lesson:
   topic: helm
 ```
 
-<<<<<<< HEAD
-- Edit the comp-wolf-chart/templates/configmap.yaml as below.
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-config
-data:
-  myvalue: "comp-wolf-chart configmap example"
-  course: {{ .Values.course }}
-  topic: {{ .Values.lesson.topic }}
-```
-
-- Let's see how the values are getting substituted with the `dry-run` option.
-
-```bash
-helm install --debug --dry-run morevalues comp-wolf-chart
-```
-
-- So far, we've seen how to place information into a template. But that information is placed into the template unmodified. Sometimes we want to transform the supplied data in a way that makes it more useful to us. Update the `comp-wolf-chart/templates/configmap.yaml` as below.
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-config
-data:
-  myvalue: "comp-wolf-chart configmap example"
-  course: {{ quote .Values.course }}
-  topic: {{ quote .Values.lesson.topic }}  
-```
-
- Let's see how the values are getting substituted with the `dry-run` option.
-
-```bash
-helm install --debug --dry-run morevalues comp-wolf-chart
-```
-
-- Helm has over 60 available functions. Some of them are defined by the [Go template language](https://pkg.go.dev/text/template) itself. Most of the others are part of the [Sprig template](https://masterminds.github.io/sprig/) library. We have already seen the quote. Let's see some other functions.
-=======
 - So far, we've seen how to place information into a template. But that information is placed into the template unmodified. Sometimes we want to transform the supplied data in a way that makes it more useful to us.
 
 - Helm has over 60 available functions. Some of them are defined by the [Go template language](https://pkg.go.dev/text/template) itself. Most of the others are part of the [Sprig template](https://masterminds.github.io/sprig/) library. Let's see some functions.
->>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 
-- Update the `comp-wolf-chart/templates/configmap.yaml` as below.
+- Update the `clarus-chart/templates/configmap.yaml` as below.
 
 ```yaml
 apiVersion: v1
@@ -355,22 +285,16 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
-<<<<<<< HEAD
-  myvalue: "comp-wolf-chart configmap example"
-  course: {{ .Values.course }}
-  topic: {{ .Values.lesson.topic }}
-=======
   myvalue: "clarus-chart configmap example"
   course: {{ quote .Values.course }}
   topic: {{ upper .Values.lesson.topic }}
->>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
   time: {{ now | date "2006.01.02" | quote }} 
 ```
 
  Let's see how the values are getting substituted with the `dry-run` option.
 
 ```bash
-helm install --debug --dry-run morevalues comp-wolf-chart
+helm install --debug --dry-run morevalues clarus-chart
 ```
 
 - **now** function shows the current date/time.
@@ -381,9 +305,9 @@ helm install --debug --dry-run morevalues comp-wolf-chart
 
 - In this part, we are going to look at Helm's tool for providing instructions to your chart users. At the end of a `helm install` or `helm upgrade`, Helm can print out a block of helpful information for users. This information is highly customizable using templates.
 
-- To add installation notes to your chart, simply create a `comp-wolf-chart/NOTES.txt` file. This file is plain text, but it is processed like a template and has all the normal template functions and objects available.
+- To add installation notes to your chart, simply create a `clarus-chart/NOTES.txt` file. This file is plain text, but it is processed like a template and has all the normal template functions and objects available.
 
-- Let's create a simple `NOTES.txt` file under `comp-wolf-chart/templates` folder.
+- Let's create a simple `NOTES.txt` file under `clarus-chart/templates` folder.
 
 ```txt
 Thank you for installing {{ .Chart.Name }}.
@@ -399,7 +323,7 @@ To learn more about the release, try:
 - Let's run our helm chart.
 
 ```bash
-helm install notes-demo comp-wolf-chart
+helm install notes-demo clarus-chart
 ```
 
 - Using NOTES.txt this way is a great way to give your users detailed information about how to use their newly installed chart. Creating a NOTES.txt file is strongly recommended, though it is not required.
@@ -472,14 +396,14 @@ helm search repo mylocalrepo
 - Let's store charts in your chart repository. Now that we have a chart repository, let's upload a chart and an index file to the repository. Charts in a chart repository must be packaged `helm package chart-name/` and versioned correctly [following SemVer 2 guidelines](https://semver.org/).
 
 ```bash
-helm package comp-wolf-chart
+helm package clarus-chart
 ```
 
 - Once we have a packaged chart ready, create a new directory, and move your packaged chart to that directory.
 
 ```bash
 mkdir my-charts
-mv comp-wolf-chart-0.1.0.tgz my-charts
+mv clarus-chart-0.1.0.tgz my-charts
 helm repo index my-charts --url http://<public-ip>:8080
 ```
 
@@ -496,7 +420,7 @@ my-charts/
   |
   |- index.yaml
   |
-  |- comp-wolf-chart-0.1.0.tgz
+  |- clarus-chart-0.1.0.tgz
 ```
 
 ### The index file
@@ -508,16 +432,16 @@ This is the index file of my-charts:
 ```yaml
 apiVersion: v1
 entries:
-  comp-wolf-chart:
+  clarus-chart:
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-12-07T11:59:09.466396276+03:00"
     description: A Helm chart for Kubernetes
     digest: 712c46edcd85b167881bb644d8de4391eee9acd76aabb75fa2f6e53bedd1c872
-    name: comp-wolf-chart
+    name: clarus-chart
     type: application
     urls:
-    - http://<public ip>:8080/comp-wolf-chart-0.1.0.tgz
+    - http://<public ip>:8080/clarus-chart-0.1.0.tgz
     version: 0.1.0
 generated: "2021-12-07T11:59:09.466104188+03:00"
 ```
@@ -526,7 +450,7 @@ generated: "2021-12-07T11:59:09.466104188+03:00"
 
 ```bash
 cd my-charts
-curl --data-binary "@comp-wolf-chart-0.1.0.tgz" http://<public ip>:8080/api/charts
+curl --data-binary "@clarus-chart-0.1.0.tgz" http://<public ip>:8080/api/charts
 ```
 
 - Now we're going to update all the repositories. It's going to connect all the repositories and check is there any new chart.
@@ -537,11 +461,11 @@ helm repo update
 helm search repo mylocalrepo
 ```
 
-- Let's see how to maintain the chart version. In `comp-wolf-chart/Chart.yaml`, set the `version` value to `0.1.1`and then package the chart.
+- Let's see how to maintain the chart version. In `clarus-chart/Chart.yaml`, set the `version` value to `0.1.1`and then package the chart.
 
 ```bash
-helm package comp-wolf-chart
-mv comp-wolf-chart-0.1.1.tgz my-charts
+helm package clarus-chart
+mv clarus-chart-0.1.1.tgz my-charts
 helm repo index my-charts --url http://<public-ip>:8080
 ```
 
@@ -549,7 +473,7 @@ helm repo index my-charts --url http://<public-ip>:8080
 
 ```bash
 cd my-charts
-curl --data-binary "@comp-wolf-chart-0.1.1.tgz" http://<public ip>:8080/api/charts
+curl --data-binary "@clarus-chart-0.1.1.tgz" http://<public ip>:8080/api/charts
 ```
 
 - Let's update all the repositories.
@@ -575,15 +499,11 @@ helm plugin ls
 helm plugin install https://github.com/chartmuseum/helm-push.git
 ```
 
-- In comp-wolf-chart/Chart.yaml, set the `version` value to `0.2.0`and push the chart.
+- In clarus-chart/Chart.yaml, set the `version` value to `0.2.0`and push the chart.
 
 ```bash
-<<<<<<< HEAD
-helm cm-push comp-wolf-chart mylocalrepo
-=======
 cd
 helm cm-push clarus-chart mylocalrepo
->>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 ```
 
 - Update and search the mylocalrepo.
@@ -597,7 +517,7 @@ helm search repo mylocalrepo
 - We can also change the version with the --version flag.
 
 ```bash
-helm cm-push comp-wolf-chart mylocalrepo --version="1.2.3"
+helm cm-push clarus-chart mylocalrepo --version="1.2.3"
 ```
 
 - Update and search the mylocalrepo.
@@ -610,7 +530,7 @@ helm search repo mylocalrepo
 
 - Let's install our chart into the Kubernetes cluster.
 
-- Update the `comp-wolf-chart/templates/configmap.yaml` as below.
+- Update the `clarus-chart/templates/configmap.yaml` as below.
 
 ```yaml
 apiVersion: v1
@@ -618,7 +538,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
-  myvalue: "comp-wolf-chart configmap example"
+  myvalue: "clarus-chart configmap example"
   course: {{ .Values.course }}
   topic: {{ .Values.lesson.topic }}
   time: {{ now | date "2006.01.02" | quote }} 
@@ -628,7 +548,7 @@ data:
 - Push the chart again.
 
 ```bash
-helm cm-push comp-wolf-chart mylocalrepo --version="1.2.4"
+helm cm-push clarus-chart mylocalrepo --version="1.2.4"
 ```
 
 - Install the chart.
@@ -636,7 +556,7 @@ helm cm-push comp-wolf-chart mylocalrepo --version="1.2.4"
 ```bash
 helm repo update
 helm search repo mylocalrepo
-helm install from-local-repo mylocalrepo/comp-wolf-chart
+helm install from-local-repo mylocalrepo/clarus-chart
 ```
 
 - Check the configmap.
@@ -648,7 +568,7 @@ kubectl describe cm from-local-repo-config
 
 - This time we will update the release.
 
-- Update the `comp-wolf-chart/templates/configmap.yaml` as below.
+- Update the `clarus-chart/templates/configmap.yaml` as below.
 
 ```yaml
 apiVersion: v1
@@ -656,7 +576,7 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
-  myvalue: "comp-wolf-chart configmap example"
+  myvalue: "clarus-chart configmap example"
   course: {{ .Values.course }}
   topic: {{ .Values.lesson.topic }}
   time: {{ now | date "2006.01.02" | quote }} 
@@ -666,14 +586,14 @@ data:
 - Push the chart again.
 
 ```bash
-helm cm-push comp-wolf-chart mylocalrepo --version="1.2.5"
+helm cm-push clarus-chart mylocalrepo --version="1.2.5"
 helm repo update
 ```
 
 - Update the release.
 
 ```bash
-helm upgrade from-local-repo mylocalrepo/comp-wolf-chart
+helm upgrade from-local-repo mylocalrepo/clarus-chart
 ```
 
 - Check the configmap.
@@ -692,7 +612,7 @@ helm history from-local-repo
 - We can upgrade the release to any version with "--version" flag.
 
 ```bash
-helm upgrade from-local-repo mylocalrepo/comp-wolf-chart --version 1.2.4
+helm upgrade from-local-repo mylocalrepo/clarus-chart --version 1.2.4
 ```
 
 - Check the configmap.
