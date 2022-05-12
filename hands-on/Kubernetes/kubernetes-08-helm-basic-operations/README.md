@@ -245,6 +245,7 @@ helm uninstall myvalue
 helm install --debug --dry-run setflag comp-wolf-chart --set course=AWS
 ```
 
+<<<<<<< HEAD
 - Install the comp-wolf-chart.
 
 ```bash
@@ -270,6 +271,8 @@ kubectl describe cm comp-wolf-chart-config
 helm uninstall setflag
 ```
 
+=======
+>>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 - We can also get values with built-in objects. Objects can be simple and have just one value. Or they can contain other objects or functions. For example. the Release object contains several objects (like Release.Name) and the Files object has a few functions.
 
 - Edit the comp-wolf-chart/templates/configmap.yaml as below.
@@ -298,6 +301,7 @@ lesson:
   topic: helm
 ```
 
+<<<<<<< HEAD
 - Edit the comp-wolf-chart/templates/configmap.yaml as below.
 
 ```yaml
@@ -337,6 +341,11 @@ helm install --debug --dry-run morevalues comp-wolf-chart
 ```
 
 - Helm has over 60 available functions. Some of them are defined by the [Go template language](https://pkg.go.dev/text/template) itself. Most of the others are part of the [Sprig template](https://masterminds.github.io/sprig/) library. We have already seen the quote. Let's see some other functions.
+=======
+- So far, we've seen how to place information into a template. But that information is placed into the template unmodified. Sometimes we want to transform the supplied data in a way that makes it more useful to us.
+
+- Helm has over 60 available functions. Some of them are defined by the [Go template language](https://pkg.go.dev/text/template) itself. Most of the others are part of the [Sprig template](https://masterminds.github.io/sprig/) library. Let's see some functions.
+>>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 
 - Update the `comp-wolf-chart/templates/configmap.yaml` as below.
 
@@ -346,9 +355,15 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
 data:
+<<<<<<< HEAD
   myvalue: "comp-wolf-chart configmap example"
   course: {{ .Values.course }}
   topic: {{ .Values.lesson.topic }}
+=======
+  myvalue: "clarus-chart configmap example"
+  course: {{ quote .Values.course }}
+  topic: {{ upper .Values.lesson.topic }}
+>>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
   time: {{ now | date "2006.01.02" | quote }} 
 ```
 
@@ -563,7 +578,12 @@ helm plugin install https://github.com/chartmuseum/helm-push.git
 - In comp-wolf-chart/Chart.yaml, set the `version` value to `0.2.0`and push the chart.
 
 ```bash
+<<<<<<< HEAD
 helm cm-push comp-wolf-chart mylocalrepo
+=======
+cd
+helm cm-push clarus-chart mylocalrepo
+>>>>>>> 135c756f80935d3e18f87e6f1ae43c90b4fa05e3
 ```
 
 - Update and search the mylocalrepo.
