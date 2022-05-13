@@ -33,6 +33,7 @@ CMD python ./app.py
 ---
 
 # Part 3 - Pushed to Docker Hub Repository
+
 Open the terminal in each folder where your project files and docker file are located
 
 sudo usermod -a -G docker ubuntu
@@ -71,6 +72,7 @@ data:
 touch secret.yaml
 
 # touch secret.yaml
+---
 apiVersion: v1
 kind: Secret
 metadata:
@@ -89,6 +91,7 @@ mkdir solution_files & cd solution_files
 touch db-pv.yaml
 
 # touch db-pv.yaml
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -98,7 +101,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 20Gi
+    storage: 8Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
