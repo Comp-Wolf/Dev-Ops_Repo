@@ -30,17 +30,29 @@ WORKDIR /app
 RUN pip install –r requirements.txt
 EXPOSE 80
 CMD python ./app.py
+---
 
 # Part 3 - Pushed to Docker Hub Repository
 Open the terminal in each folder where your project files and docker file are located
 
-docker build –t “<docker hub-account>/<image-name>: tag”
+sudo usermod -a -G docker ubuntu
+sudo newgrp docker
+
+sudo docker build -t "compwolf/phonebook_resultserver:1.0" .
+
+sudo docker login
+docker push compwolf/phonebook_resultserver:1.0
+docker image ls
+
+sudo docker build -t "compwolf/phonebook_webserver:1.0" .
+docker push compwolf/phonebook_webserver:1.0
 
 # Part 4 - Secret and ConfigMap Volumes
-mkdir configuration_files
-cd configuration_files
+mkdir configuration_files & cd configuration_files
 
-#  Touch configmap.yaml
+touch configmap.yaml
+
+# touch configmap.yaml
 
 Encode password
 
@@ -54,20 +66,29 @@ metadata:
 data:
   mysql-database: phonebook #
   mysql-host: mysql-service
+---
 
-# Touch secret.yaml
+touch secret.yaml
+
+# touch secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name:  mysql-secret
 data:
-  mysql-root-password: c2VjcmV0
-  mysql-password: c2VjcmV0
-  mysql-username: Y2xhcnVzd2F5
+  mysql-root-password: Y29tcC13b2xm     # echo -n 'comp-wolf' | base64 (bu komut ile şifremizi base64 formatında veriyor)
+  mysql-password: Y29tcC13b2xm
+  mysql-username: Y2xhcnVzd2F5    # echo -n 'admin' | base64 (bu komut ile username mimizi base64 formatında veriyor)
 type: Opaque
 
 # Part 5 - Persistent Volumes
-# Db-pv.yaml
+
+cd ..
+mkdir solution_files & cd solution_files
+
+touch db-pv.yaml
+
+# touch db-pv.yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -77,12 +98,16 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 5Gi
+    storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
     path: "/home/ubuntu/mnt/data"
-Db-pvc.yaml
+---
+
+touch db-pvc.yaml
+
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -93,9 +118,14 @@ spec:
   storageClassName: manual
   resources:
     requests:
-      storage: 1Gi
+      storage: 5Gi
+---
 
 # Part 6 - DB deployment and Service
+
+touch db-deployment.yaml
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -140,13 +170,36 @@ spec:
               key: mysql-database
         volumeMounts:
           - name: mysql-storage
-            mountPath: /mnt/data
+            mountPath: /var/lib/mysql
       volumes:
         - name: mysql-storage
           persistentVolumeClaim:
             claimName: database-persistent-volume-claim
+---
 
-Part 7 - Web Deployment and Service
+# Part 7 - db service
+
+touch db-service.yaml
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql-service
+spec:
+  selector:
+    app: mysql
+  ports:
+  - protocol: TCP
+    port:  3306
+    targetPort:  3306
+---
+
+# Part 8 - Web Deployment and Service
+
+touch web-deployment.yaml
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -167,7 +220,7 @@ spec:
         app: phonebook-web
     spec:
       containers:
-        - image: engingltekin/phonebook-flask-app_web:1.0
+        - image: compwolf/phonebook_resultserver:1.0
           imagePullPolicy: Always
           name: myweb
           ports:
@@ -201,6 +254,12 @@ spec:
               memory: 250Mi
               cpu: 80m	
 ---
+
+# Part 9 - Web Service
+
+touch web-service.yaml
+
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -212,10 +271,15 @@ spec:
   ports:
     - protocol: TCP
       nodePort: 30002
-      port: 5000
+      port: 80
       targetPort: 80
+---
 
-# Part 8 - Search Deployment and Service
+# Part 10 - Crud Deployment and Service
+
+touch crud-deployment.yaml
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -236,7 +300,7 @@ spec:
         app: phonebook-crud
     spec:
       containers:
-        - image: engingltekin/phonebook-flask-app_result:1.0
+        - image: compwolf/phonebook_webserver:1.0
           imagePullPolicy: Always
           name: myweb
           ports:
@@ -268,20 +332,34 @@ spec:
               cpu: 100m
             requests:
               memory: 250Mi
-              cpu: 80m	
+              cpu: 80m
 --- 
+
+# Part 11 - Crud Service
+
+touch crud-service.yaml
+
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
+  name: crud-service
 spec:
   selector:
-    app: phonebook-web
+    app: phonebook-crud
   type: NodePort
   ports:
     - protocol: TCP
-      nodePort: 30002
-      port: 5000
+      nodePort: 30001
+      port: 80
       targetPort: 80
+---
 
-# Part 9 - Apply Manifest files
+# Part 11
+
+cd ..
+
+kubectl apply -f configuration_files/
+
+kubectl apply -f solution_files/
+
