@@ -101,7 +101,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 8Gi
+    storage: 20Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -163,7 +163,7 @@ spec:
               key: mysql-password
         - name: MYSQL_USER
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: mysql-secret
               key: mysql-username
         - name: MYSQL_DATABASE
@@ -173,7 +173,7 @@ spec:
               key: mysql-database
         volumeMounts:
           - name: mysql-storage
-            mountPath: /var/lib/mysql
+            mountPath: /mnt/data
       volumes:
         - name: mysql-storage
           persistentVolumeClaim:
@@ -223,7 +223,7 @@ spec:
         app: phonebook-web
     spec:
       containers:
-        - image: compwolf/phonebook_resultserver:1.0
+        - image: compwolf/phonebook-flask-app_web:1.0
           imagePullPolicy: Always
           name: myweb
           ports:
@@ -246,7 +246,7 @@ spec:
                   key: mysql-database
             - name: MYSQL_USER
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-username
           resources:
@@ -255,7 +255,7 @@ spec:
               cpu: 100m
             requests:
               memory: 250Mi
-              cpu: 80m	
+              cpu: 80m		
 ---
 
 # Part 9 - Web Service
@@ -274,13 +274,13 @@ spec:
   ports:
     - protocol: TCP
       nodePort: 30002
-      port: 80
+      port: 5000
       targetPort: 80
 ---
 
-# Part 10 - Crud Deployment and Service
+# Part 10 - Search Deployment and Service
 
-touch crud-deployment.yaml
+touch Search-deployment.yaml
 
 ---
 apiVersion: apps/v1
@@ -303,7 +303,7 @@ spec:
         app: phonebook-crud
     spec:
       containers:
-        - image: compwolf/phonebook_webserver:1.0
+        - image: compwolf/phonebook-flask-app_result:1.0
           imagePullPolicy: Always
           name: myweb
           ports:
@@ -326,7 +326,7 @@ spec:
                   key: mysql-database
             - name: MYSQL_USER
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: mysql-secret
                   key: mysql-username
           resources:
@@ -335,26 +335,26 @@ spec:
               cpu: 100m
             requests:
               memory: 250Mi
-              cpu: 80m
+              cpu: 80m	
 --- 
 
-# Part 11 - Crud Service
+# Part 11 - Search Serviceservice
 
-touch crud-service.yaml
+touch Search-service.yaml
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: crud-service
+  name: web-service
 spec:
   selector:
-    app: phonebook-crud
+    app: phonebook-web
   type: NodePort
   ports:
     - protocol: TCP
-      nodePort: 30001
-      port: 80
+      nodePort: 30002
+      port: 5000
       targetPort: 80
 ---
 
@@ -366,3 +366,4 @@ kubectl apply -f configuration_files/
 
 kubectl apply -f solution_files/
 
+# mutlu son :) iyi seyirler, başarılar herkese...
