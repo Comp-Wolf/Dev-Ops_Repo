@@ -68,7 +68,7 @@ $ sudo su
 $ cd /etc/ansible
 $ ls
 $ vim hosts
-[webservers]
+[comp-wolf]
 node1 ansible_host=<node1_ip> ansible_user=ec2-user
 node2 ansible_host=<node2_ip> ansible_user=ec2-user
 
@@ -80,7 +80,7 @@ ansible_ssh_private_key_file=/home/ec2-user/<pem file>
 
 - Explain what an ```alias``` (node1 and node2) is and where we use it.
 
-- Explain what ```[webservers] and [all:vars]``` expressions are. Elaborate the concepts of [group name](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups), [group variables](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#assigning-a-variable-to-many-machines-group-variables) and [default groups](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#default-groups). 
+- Explain what ```[comp-wolf] and [all:vars]``` expressions are. Elaborate the concepts of [group name](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups), [group variables](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#assigning-a-variable-to-many-machines-group-variables) and [default groups](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#default-groups). 
 
 - Visit the above links for helping to understand the subject. 
 
@@ -102,14 +102,14 @@ $ scp -i <pem file> <pem file> ec2-user@<public DNS name of Control Node>:/home/
 
 ```bash
 $ ansible all --list-hosts
-$ ansible webservers --list-hosts
+$ ansible comp-wolf --list-hosts
 ```
 
 - To make sure that all our hosts are reachable, we will run various ad-hoc commands that use the ping module.
 
 ```bash
 $ ansible all -m ping
-$ ansible webservers -m ping
+$ ansible comp-wolf -m ping
 $ ansible node1 -m ping
 ```
 - Explain the content of the output. 
@@ -166,7 +166,7 @@ $ ansible --help
 - Run the command below.
 
 ```bash
-$ ansible webservers -a "uptime"
+$ ansible comp-wolf -a "uptime"
 web_server1 | CHANGED | rc=0 >>
  13:00:59 up 42 min,  1 user,  load average: 0.08, 0.02, 0.01
 ```
@@ -186,18 +186,18 @@ load average over the last 15 minutes: 1%
 - Run the command below.
 
 ```bash
-$ ansible webservers -m shell -a "systemctl status sshd"
+$ ansible comp-wolf -m shell -a "systemctl status sshd"
 ```
 - Explain the output.
 
 - Run the command below.
 ```bash
-$ ansible webservers -m command -a 'df -h'
+$ ansible comp-wolf -m command -a 'df -h'
 ```
 - Then run the same command without ```-m command``` part.
 
 ```bash
-$ ansible webservers -a 'df -h'
+$ ansible comp-wolf -a 'df -h'
 ```
 
 - Mention about the fact that the default ad-hoc module is the command module.
@@ -210,7 +210,7 @@ $ vi testfile    # Create a text file name "testfile"
 ```
 
 ```bash
-$ ansible webservers -m copy -a "src=/etc/ansible/testfile dest=/home/ec2-user/testfile"
+$ ansible comp-wolf -m copy -a "src=/etc/ansible/testfile dest=/home/ec2-user/testfile"
 $ ansible node1 -m shell -a "echo Hello Clarusway > /home/ec2-user/testfile2 ; cat testfile2"
 ```
 
@@ -261,7 +261,7 @@ $ ansible node1:node2 -m shell -a "echo Hello Clarusway > /home/ec2-user/testfil
 - Run the command below.
 
 ```bash
-ansible webservers -b -m shell -a "amazon-linux-extras install -y nginx1 ; systemctl start nginx ; systemctl enable nginx" 
+ansible comp-wolf -b -m shell -a "amazon-linux-extras install -y nginx1 ; systemctl start nginx ; systemctl enable nginx" 
 ```
 
 - Run the commands below for Ubuntu server
@@ -275,7 +275,7 @@ $ ansible node3 -b -m shell -a "apt update -y ; apt-get install -y nginx ; syste
 - Run the command below to remove the nginx package.
 
 ```bash
-$ ansible webservers -b -m shell -a "yum -y remove nginx"
+$ ansible comp-wolf -b -m shell -a "yum -y remove nginx"
 ```
 
 ### Using Yum and Package Module
@@ -295,7 +295,7 @@ $ ansible-doc yum
 - Run the command below ```twice```.
 
 ```bash
-$ ansible webservers -b -m yum -a "name=nginx state=present"    
+$ ansible comp-wolf -b -m yum -a "name=nginx state=present"    
 ```
 
 -  Explain the difference of the standard outputs. Emphasize the changes in color and ```changed``` property together with idempotency. 
@@ -322,10 +322,10 @@ $ vim inventory
 ```
 ```bash
 
-[webservers]
+[comp-wolf]
 node1 ansible_host=<node1_ip> ansible_user=ec2-user
 
-[webservers:vars]
+[comp-wolf:vars]
 ansible_ssh_private_key_file=/home/ec2-user/<YOUR-PEM-FILE-NAME>.pem
 ```
 
