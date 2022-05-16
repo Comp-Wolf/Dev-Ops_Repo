@@ -67,7 +67,7 @@ resource "null_resource" "config" {
     host = aws_instance.nodes[0].public_ip
     type = "ssh"
     user = "ec2-user"
-    private_key = file("E:/Clarusway/DERSLER/Dev-Ops_Repo/")
+    private_key = file("E:/Clarusway/DERSLER/Dev-Ops_Repo/erdogan.pem")
     # Do not forget to define your key file path correctly!
   }
 
@@ -78,7 +78,7 @@ resource "null_resource" "config" {
 
   provisioner "file" {
     # Do not forget to define your key file path correctly!
-    source = "E:/Clarusway/DERSLER/Dev-Ops_Repo/"
+    source = "E:/Clarusway/DERSLER/Dev-Ops_Repo/erdogan.pem"
     destination = "/home/ec2-user/erdogan.pem"
   }
 
