@@ -27,7 +27,7 @@ resource "aws_instance" "amazon-linux-2" {
   ami = "ami-0a8b4cd432b1c3063"
   instance_type = "t2.micro"
   count = 3
-  key_name = "walter-pem" ####### CHANGE HERE #######
+  key_name = "comp-wolf" ####### CHANGE HERE #######
   security_groups = ["ansible-session-sec-gr"]
   tags = {
     Name = element(var.tags, count.index)
@@ -38,7 +38,7 @@ resource "aws_instance" "amazon-linux-2" {
 resource "aws_instance" "ubuntu" {
   ami = "ami-04505e74c0741db8d"
   instance_type = "t2.micro"
-  key_name = "walter-pem"
+  key_name = "comp-wolf"
   security_groups = ["ansible-session-sec-gr"]
 
 tags = {
@@ -80,12 +80,12 @@ resource "null_resource" "config" {
     host = aws_instance.amazon-linux-2[0].public_ip
     type = "ssh"
     user = "ec2-user"
-    private_key = file("~/.ssh/walter-pem.pem") ####### CHANGE HERE #######
+    private_key = file("~/.ssh/comp-wolf.pem") ####### CHANGE HERE #######
     }
 
   provisioner "remote-exec" {
     inline = [
-    "sudo apt install rsync grsync -y",
+    "sudo yum install rsync grsync -y",
     ]
   }
 
