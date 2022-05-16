@@ -49,10 +49,10 @@ $ vim hosts
 ```bash
 [webservers]
 node1 ansible_host=<node1_ip> ansible_user=ec2-user
-node2 ansible_host=<node1_ip> ansible_user=ec2-user
+node2 ansible_host=<node2_ip> ansible_user=ec2-user
 
 [ubuntuservers]
-node3 ansible_host=<node2_ip> ansible_user=ubuntu
+node3 ansible_host=<node3_ip> ansible_user=ubuntu
 
 [all:vars]
 ansible_ssh_private_key_file=/home/ec2-user/<pem file>
