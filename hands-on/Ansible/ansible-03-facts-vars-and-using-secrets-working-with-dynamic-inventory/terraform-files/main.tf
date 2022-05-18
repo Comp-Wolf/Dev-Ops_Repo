@@ -7,7 +7,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "4.14.0"
     }
   }
 }
@@ -19,7 +19,7 @@ provider "aws" {
 }
 
 locals {
-  user = "walter"
+  user = "comp-wolf"
 }
 
 
@@ -68,7 +68,7 @@ resource "null_resource" "config" {
     host = aws_instance.nodes[0].public_ip
     type = "ssh"
     user = "ec2-user"
-    private_key = file("~/.ssh/${var.mykeypem}")
+    private_key = file("E:/Clarusway/DERSLER/Dev-Ops_Repo/${var.mykeypem}")
     # Do not forget to define your key file path correctly!
   }
 
@@ -79,7 +79,7 @@ resource "null_resource" "config" {
 
   provisioner "file" {
     # Do not forget to define your key file path correctly!
-    source = "~/.ssh/${var.mykeypem}"
+    source = "E:/Clarusway/DERSLER/Dev-Ops_Repo/${var.mykeypem}"
     destination = "/home/ec2-user/${var.mykeypem}"
   }
 
