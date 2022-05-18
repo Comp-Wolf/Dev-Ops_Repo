@@ -437,7 +437,7 @@ $ cat > ansible.cfg
 ```cfg
 [defaults]
 host_key_checking = False
-inventory=/etc/ansible/hosts
+inventory=~/dynamic-inventory/inventory_aws_ec2.yml
 interpreter_python=auto_silent
 private_key_file=~/erdogan.pem
 ```
