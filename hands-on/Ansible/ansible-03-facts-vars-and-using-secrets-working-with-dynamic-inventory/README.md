@@ -72,13 +72,13 @@ $ cd /etc/ansible
 $ ls
 $ vim hosts
 [webservers]
-node1 ansible_host=<node1_ip> ansible_user=ec2-user
+node1 ansible_host=172.31.23.211 ansible_user=ec2-user
 
 [dbservers]
-node2 ansible_host=<node2_ip> ansible_user=ec2-user
+node2 ansible_host=172.31.18.65 ansible_user=ec2-user
 
 [all:vars]
-ansible_ssh_private_key_file=/home/ec2-user/<pem file>
+ansible_ssh_private_key_file=/home/ec2-user/erdogan.pem
 ```
 
 - Explain what ```ansible_host```, ```ansible_user``` and ansible_ssh_key_file parameters are. For this reason visit the Ansible's [inventory parameters web site](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters).
@@ -92,18 +92,18 @@ ansible_ssh_private_key_file=/home/ec2-user/<pem file>
 - Copy your pem file to the /home/ec2-user directory. First, go to your pem file directory on your local PC and run the following command.
 
 ```bash
-$ scp -i <pem file> <pem file> ec2-user@<public DNS name of Control Node>:/home/ec2-user
+$ scp -i erdogan.pem erdogan.pem ec2-user@<public DNS name of Control Node>:/home/ec2-user
 ```
 - Check if the file is transferred to the remote machine. 
 
-- As an alternative way, create a file on the control node with the same name as the <pem file> in ```/etc/ansible``` directory. 
+- As an alternative way, create a file on the control node with the same name as the erdogan.pem in ```/etc/ansible``` directory. 
 
 - Then copy the content of the pem file and paste it in the newly created pem file on the control node.
 
 - To make sure that all our hosts are reachable, we will run various ad-hoc commands that use the ping module.
 
 ```bash
-$ chmod 400 <pem file>
+$ chmod 400 erdogan.pem
 ```
 
 ```bash
@@ -203,7 +203,7 @@ $ cat secret.yml
 - create a file named "create-user"
 
 ```bash
-$ nano create-user.yml
+$ cat > create-user.yml
 
 ```
 
@@ -282,7 +282,7 @@ $ cat secret-1.yml
 - create a file named "create-user-1"
 
 ```bash
-$ nano create-user-1.yml
+$ cat > create-user-1.yml
 
 ```
 
@@ -416,7 +416,7 @@ $ cd dynamic-inventory
 - Create a file named ```inventory.txt``` with the command below.
 
 ```bash
-$ nano inventory.txt
+$ cat > inventory.txt
 ```
 
 - Paste the content below into the inventory.txt file.
@@ -431,7 +431,7 @@ web_server  ansible_host=<YOUR-WEB-SERVER-IP>  ansible_user=ec2-user  ansible_ss
 - Create file named ```ansible.cfg``` under the the ```dynamic-inventory``` directory.
 
 ```bash
-$ nano ansible.cfg
+$ cat > ansible.cfg
 ```
 
 ```cfg
@@ -439,14 +439,14 @@ $ nano ansible.cfg
 host_key_checking = False
 inventory=/etc/ansible/hosts
 interpreter_python=auto_silent
-private_key_file=~/<pem file>
+private_key_file=~/erdogan.pem
 ```
 
 
 - Create a file named ```ping-playbook.yml``` and paste the content below.
 
 ```bash
-$ nano ping-playbook.yml
+$ cat > ping-playbook.yml
 ```
 
 ```yml
@@ -487,14 +487,14 @@ $ ansible-playbook ping-playbook.yml
 - install "boto3 and botocore"
 
 ```bash
-$ sudo yum install pip
+$ sudo yum install pip -y 
 $ pip install --user boto3 botocore
 ```
 
 - Create another file named ```inventory_aws_ec2.yml``` in the project directory.
 
 ```bash
-$ nano inventory_aws_ec2.yml
+$ cat > inventory_aws_ec2.yml
 ```
 
 ```yml
@@ -526,7 +526,7 @@ $ ansible-inventory -i inventory_aws_ec2.yml --graph
 - To make sure that all our hosts are reachable with dynamic inventory, we will run various ad-hoc commands that use the ping module.
 
 ```bash
-$ ansible all -m ping --key-file "~/<pem file>"
+$ ansible all -m ping --key-file "~/erdogan.pem"
 ```
 
 - create a playbook name "user.yml"
@@ -538,7 +538,7 @@ $ ansible all -m ping --key-file "~/<pem file>"
   become: true
   vars:
     user: lisa
-    ansible_ssh_private_key_file: "/home/ec2-user/<pem file>"
+    ansible_ssh_private_key_file: "/home/ec2-user/erdogan.pem"
   tasks:
     - name: create a user {{ user }}
       user:
