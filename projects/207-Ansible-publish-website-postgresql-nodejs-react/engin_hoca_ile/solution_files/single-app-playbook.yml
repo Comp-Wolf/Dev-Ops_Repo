@@ -1,0 +1,24 @@
+- name  : Common Configuration
+  hosts   : all
+  tasks   :
+    - name  : install the latest version
+      become  : yes
+      command : amazon-linux-extras install docker -y
+    - name  : start docker
+      become  : yes
+      command : systremctl start docker
+    - name  : start docker
+      become  : yes
+      command : systremctl enable docker
+- name   : Postgres
+  hosts   : _ansible_postgresql
+  become  : yes
+  tasks   : 
+    - name  : install postgres
+      become  : yes
+      yum     :
+        - postgresql
+        - postgresql-server
+      
+
+      
