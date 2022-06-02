@@ -157,7 +157,7 @@ Name     : PolicyforECS
 
       - For `Memory`, select `1 GB`.
 
-      - For `Task role`, select `ecsTaskExecutionRole`.
+      - For `Task role`, select `PolicyforECS`.
 
       - Keep the other parameters as default.
 
