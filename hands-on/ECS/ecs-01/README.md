@@ -53,7 +53,7 @@ At the end of the this hands-on training, students will be able to;
 - connect to your instance with SSH.
 
 ```bash
-ssh -i .ssh/xxxxx.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazonaws.com
+ssh -i .ssh/comp-wolf.pem ec2-user@ec2-3-133-106-98.us-east-2.compute.amazonaws.com
 ```
 
 - Check your AWS CLI version `aws --version` command.(*AWS CLI is already installed on Amazon Linux 2 AMIs, but Amazon ECR functionality is available in the AWS CLI starting with version 1.9.15*).
@@ -67,7 +67,7 @@ aws configure
 - Authenticate the Docker CLI to your default `registry` 
 
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <Account id>.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <account id>.dkr.ecr.us-east-1.amazonaws.com
 ```
 
 - Copy the files given within the hands-on folder [clarusshop](./clarusshop)  and paste under the `/home/ec2-folder`.
@@ -227,7 +227,7 @@ aws ecs create-cluster --cluster-name cluster-with-awscli
 	"networkMode": "awsvpc",
 	"containerDefinitions": [{
 		"name": "clarusshop-app",
-		"image": "046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusshop:latest",
+		"image": "<account id>.dkr.ecr.us-east-1.amazonaws.com/clarusshop:latest",
 		"portMappings": [{
 			"containerPort": 80,
 			"protocol": "tcp"
@@ -239,7 +239,7 @@ aws ecs create-cluster --cluster-name cluster-with-awscli
 	],
 	"cpu": "256",
 	"memory": "512",
-      "executionRoleArn": "arn:aws:iam::DON'T FORGET TO CHANGE ME:role/ecsTaskExecutionRole"
+      "executionRoleArn": "arn:aws:iam::<account id>:role/PolicyforECS"
 }
 ```
 
@@ -260,7 +260,7 @@ aws ecs list-task-definitions
 - After you have registered a task for your account, you can create a service for the registered task in your cluster. 
 
 ```bash
-aws ecs create-service --cluster cluster-with-awscli --service-name clarusshop-service --task-definition clarusshop-task-awscli --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-077c9758],securityGroups=[sg-e29b36ce],assignPublicIp=ENABLED}"
+aws ecs create-service --cluster cluster-with-awscli --service-name clarusshop-service --task-definition clarusshop-task-awscli --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-0dc815baddadbaafa],securityGroups=[sg-0ca0ee4318daf6a76],assignPublicIp=ENABLED}"
 ```
 
 - List the services for your cluster. 
