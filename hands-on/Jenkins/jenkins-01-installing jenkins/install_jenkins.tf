@@ -15,7 +15,7 @@ data "aws_ami" "tf-ami" {
 resource "aws_instance" "tf-jenkins-server" {
   ami           = data.aws_ami.tf-ami.id
   instance_type = "t2.micro"
-  key_name      = "oliver"
+  key_name      = "comp-wolf"
   //  Write your pem file name
   security_groups = ["jenkins-server-sec-gr"]
   tags = {
