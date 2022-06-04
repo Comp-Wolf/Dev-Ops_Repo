@@ -18,11 +18,10 @@ resource "aws_instance" "tf-jenkins-server" {
   key_name      = "comp-wolf"
   //  Write your pem file name
   security_groups = ["jenkins-server-sec-gr"]
+  user_data = file("install-jenkins.sh")
   tags = {
     Name = "Jenkins_Server"
   }
-  user_data = file("install-jenkins.sh")
-
 }
 
 resource "aws_security_group" "tf-jenkins-sec-gr" {
