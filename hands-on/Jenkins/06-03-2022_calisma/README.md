@@ -124,6 +124,8 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
   -  `Deploy to container`
 
+  -  `Locale` <jenkins'ın kalıcı olarak dilini ingilizce yapmak için yüklenen plagin. yoksa crom dili ile geliyor.>
+
 ## Part 4 - Creating a view
 
 - Click `My Views` on the left menu items or click `+` on the jobs tabs.
