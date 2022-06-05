@@ -18,23 +18,6 @@ At the end of the this hands-on training, students will be able to;
 
 - create simple Pipeline with jenkinsfile
 
-
-## Outline
-
-- Part 1 - Installing Jenkins Server on Amazon Linux 2 with `yum` Repo
-
-- Part 2 - Getting familiar with Jenkins Dashboard
-
-- Part 3 - Installing Plugins
-
-- Part 4 - Creating a view
-
-- Part 5 - Creating First Jenkins Job
-
-- Part 6 - Creating a Simple Pipeline with Jenkins
-
-- Part 7 - Creating a Jenkins Pipeline with Jenkinsfile
-
 ## Part 1 - Installing Jenkins Server on Amazon Linux 2 with `yum` Repo
 
 - Launch an AWS EC2 instance of Amazon Linux 2 AMI with security group allowing SSH and TCP 8080 ports.
@@ -61,12 +44,6 @@ sudo amazon-linux-extras install java-openjdk11 -y
 
 ```bash
 java -version
-```
-
-- Install Git
-
-```bash
-sudo yum install git -y
 ```
 
 - Add Jenkins repo to the `yum` repository.
@@ -147,6 +124,8 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
   -  `Deploy to container`
 
+  -  `Locale` <jenkins'ın kalıcı olarak dilini ingilizce yapmak için yüklenen plagin. yoksa crom dili ile geliyor.>
+
 ## Part 4 - Creating a view
 
 - Click `My Views` on the left menu items or click `+` on the jobs tabs.
@@ -214,7 +193,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Clarusway_Way to Reinvent Yourself"
+                echo "By devopsyasin to Reinvent Yourself"
                 sh 'echo second step'
                 sh 'echo another step'                
                 sh '''
