@@ -90,7 +90,7 @@ At the end of the this hands-on training, students will be able to;
     - Add -> Jenkins
       - Add `username` and `password` as `tomcat/tomcat`.
     - From `Credentials`, select `tomcat/*****`.
-  - for `Tomcat URL`, select `private ip` of staging tomcat server like `http://172.31.20.75:8080`.
+  - for `Tomcat URL`, select `private ip` of staging tomcat server like `http://54.175.125.42:8080`.
 
 - Click on `Save`.
 
