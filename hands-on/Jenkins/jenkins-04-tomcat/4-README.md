@@ -107,7 +107,7 @@ sudo chmod +x *
 ```bash
 cd /opt/tomcat/conf
 ```
-- Update `tomcat-users.xml` file.
+- Update `sudo vi tomcat-users.xml` file.
 
 - `manager-script` & `admin-gui` are needed for jenkins to access tomcat.
 
@@ -123,7 +123,7 @@ cd /opt/tomcat/conf
 
 - To configure Tomcat server we need to modify the content of the context.xml. Be careful there are two of this file. We have to modify both of them.
 
-- Go to the `/opt/tomcat/webapps/host-manager/META-INF/` and edit file `context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
+- Go to the `cd /opt/tomcat/webapps/host-manager/META-INF/` and edit file `sudo vi context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
 
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
@@ -154,7 +154,7 @@ cd /opt/tomcat/conf
 </Context>
 ```
 
-- Go to the `/opt/tomcat/webapps/manager/META-INF/` and edit file `context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
+- Go to the `cd /opt/tomcat/webapps/manager/META-INF/` and edit file `context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
 
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
@@ -184,13 +184,11 @@ cd /opt/tomcat/conf
   <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
 </Context>
 ```
-
-
 - Restart the tomcat server
 
 ```bash
-/opt/tomcat/bin/shutdown.sh
-/opt/tomcat/bin/startup.sh
+sudo /opt/tomcat/bin/shutdown.sh
+sudo /opt/tomcat/bin/startup.sh
 ```
 
 ## Part 5 - Auto start of Tomcat server at boot
