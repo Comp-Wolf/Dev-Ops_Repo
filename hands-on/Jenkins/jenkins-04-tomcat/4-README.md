@@ -74,18 +74,18 @@ wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.63/bin/apache-tomcat-9.0.63.z
 ```
 
 - Unzip tomcat file and move to `/opt`
-  
-```bash
+ ```bash
 unzip apache-tomcat-*.zip
 sudo mv apache-tomcat-9.0.63 /opt/tomcat
 ```
 
 ## Part 4 - Configure tomcat
-
 - Now Change Tomcat Server Port
-
-- Go to /opt/tomcat/conf/server.xml file
-
+- Go to 
+```bash
+sudo cat -n /opt/tomcat/conf/server.xml
+```
+file
 - Search for `Connector` and verify/change the Port Value, save the file.
 
 ```bash
@@ -107,8 +107,11 @@ sudo chmod +x *
 ```bash
 cd /opt/tomcat/conf
 ```
-- Update `sudo vi tomcat-users.xml` file.
-
+- Update
+```bash
+sudo nano tomcat-users.xml
+```
+file.
 - `manager-script` & `admin-gui` are needed for jenkins to access tomcat.
 
 - Set roles as `manager-script` & `admin-gui` and set password to tomcat as follows:
@@ -123,7 +126,15 @@ cd /opt/tomcat/conf
 
 - To configure Tomcat server we need to modify the content of the context.xml. Be careful there are two of this file. We have to modify both of them.
 
-- Go to the `cd /opt/tomcat/webapps/host-manager/META-INF/` and edit file `sudo vi context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
+- Go to the
+```bash
+cd /opt/tomcat/webapps/host-manager/META-INF/
+```
+and edit file 
+```bash
+sudo vi context.xml
+```
+Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
 
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
@@ -154,7 +165,15 @@ cd /opt/tomcat/conf
 </Context>
 ```
 
-- Go to the `cd /opt/tomcat/webapps/manager/META-INF/` and edit file `context.xml`. Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
+- Go to the 
+```bash
+cd /opt/tomcat/webapps/manager/META-INF/
+```
+and edit file 
+```bash
+sudo vi context.xml
+```
+Actually commenting out the tagged `CookieProcessor` and `Valve` parts.
 
 ```bash
 <?xml version="1.0" encoding="UTF-8"?>
@@ -185,7 +204,6 @@ cd /opt/tomcat/conf
 </Context>
 ```
 - Restart the tomcat server
-
 ```bash
 sudo /opt/tomcat/bin/shutdown.sh
 sudo /opt/tomcat/bin/startup.sh
@@ -206,7 +224,7 @@ cd /etc/systemd/system
 - In able to declare a service "unit file" must be created. Create a `tomcat.service` file.
 
 ```bash
-sudo vi tomcat.service
+sudo nano tomcat.service
 ```
 
 - Copy and paste this code in "tomcat.service" file.
@@ -234,17 +252,14 @@ WantedBy=multi-user.target
 
 - Save and exit.
 
-- Enable Tomcat server.
-
-```bash
-sudo systemctl enable tomcat
-```
-
+- Enable Tomcat server. 
+- And 
 - Start Tomcat server.
 
 ```bash
+sudo systemctl enable tomcat
 sudo systemctl start tomcat
+sudo systemctl status tomcat
 ```
-
 - Open your browser, get your Tomcat server ec2 instance Public IPv4 DNS and paste it at address bar with 8080. 
 "http://[ec2-public-dns-name]:8080"
