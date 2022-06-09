@@ -77,7 +77,7 @@ sudo su
 cd /root/.ssh
 ```
 
-- Open the "authorized_keys" file with an editor and paste the code that you copied from public key(id_rsa.pub). Save "authorized_keys" file.
+- Open the "nano authorized_keys" file with an editor and paste the code that you copied from public key(id_rsa.pub). Save "authorized_keys" file.
 
 - Get the slave node ip:
 
@@ -100,7 +100,7 @@ exit
 ```bash
 mkdir bin
 cd bin
-wget http://<jenkins_master_ip>:8080/jnlpJars/slave.jar
+wget http://184.73.138.160:8080/jnlpJars/slave.jar
 ```
 
 - Go to Jenkins dashboard, click on "Manage Jenkins" from left hand menu.
