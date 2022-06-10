@@ -100,7 +100,7 @@ exit
 ```bash
 mkdir bin
 cd bin
-wget http://184.73.138.160:8080/jnlpJars/slave.jar
+wget http://44.204.26.62:8080/jnlpJars/slave.jar
 ```
 
 - Go to Jenkins dashboard, click on "Manage Jenkins" from left hand menu.
@@ -113,13 +113,13 @@ wget http://184.73.138.160:8080/jnlpJars/slave.jar
 
 - Click `ok` button.
 
-- Enter `This is a linux slave node for jenkins` in the description field.
+- Enter `This is a compwolf slave node for jenkins` in the description field.
 
 - "Number of executors" is the maximum number of concurrent builds that Jenkins may perform on this node. Enter `2` in this field.
 
 - An agent needs to have a directory dedicated to Jenkins. Specify the path to this directory on the agent. Enter `/usr/jenkins` in the "Remote root directory" field.
 
-- Enter `Linux` in the "Labels" field.
+- Enter `compwolf` in the "Labels" field.
 
 - Select `Launch agent via execution of command on the master` from dropdown menu in the "Launch method" field.
 
@@ -141,7 +141,7 @@ wget http://184.73.138.160:8080/jnlpJars/slave.jar
 
   - Enter `My first simple free style job on slave node` in the description field.
 
-  - Find the `General` section, click "Restrict where this project can be run" and enter `Linux` for "Label Expression"
+  - Find the `General` section, click "Restrict where this project can be run" and enter `compwolf` for "Label Expression"
 
   - Go to `Build` section and choose "Execute Shell Command" step from `Add build step` dropdown menu.
 
@@ -167,14 +167,14 @@ wget http://184.73.138.160:8080/jnlpJars/slave.jar
 
 ```text
 pipeline {
-    agent { label 'Linux' }
+    agent { label 'compwolf' }
     stages {
         stage('build') {
             steps {
                 echo "Clarusway_Way to Reinvent Yourself"
                 sh 'echo second step'
                 sh 'echo another step'
-                sh 'sleep 30'
+                sh 'sleep 10'
                 sh '''
                 echo 'working on'
                 echo 'slave node'
