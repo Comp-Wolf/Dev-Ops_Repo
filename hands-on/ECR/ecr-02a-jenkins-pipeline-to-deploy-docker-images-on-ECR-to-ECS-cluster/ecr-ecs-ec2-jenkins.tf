@@ -18,11 +18,11 @@ provider "github" {
 data "aws_caller_identity" "current" {}
 
 locals {
-  github-email = "serdar@clarusway.com"                      # you need to change this line
-  github-username = "serdarcw"                              # you need to change this line
+  github-email = "alierdogan38@gmail.com"                      # you need to change this line
+  github-username = "Comp-Wolf"                              # you need to change this line
   github-token = ""      # you need to change this line
-  key_pair=""            # you need to change this line
-  pem_key_address = "~/Downloads/serdar.pem"              # you need to change this line
+  key_pair="comp-wolf"            # you need to change this line
+  pem_key_address = "~/Downloads/comp-wolf.pem"              # you need to change this line
 }
 
 resource "github_repository" "githubrepo" {
