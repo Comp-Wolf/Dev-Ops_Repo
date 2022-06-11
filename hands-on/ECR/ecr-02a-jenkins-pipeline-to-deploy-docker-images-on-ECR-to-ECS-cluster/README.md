@@ -146,6 +146,11 @@ pipeline {
 }
 ```
 
+```bash
+git add .
+git commit -m "jenkins file edit"
+git push
+```
 - explain withEnv(["HOME=${env.WORKSPACE}"]) the meaning of this line
 
 - once we see the code is running, lets build its image. to do this, we should write Dockerfile based and configure the Jenkinsfile
@@ -181,7 +186,7 @@ Press "i" to edit
 pipeline {
     agent any
     environment {
-        ECR_REGISTRY = "<aws_account_id>.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway/to-do-app"
     }
     stages {
@@ -241,13 +246,13 @@ git push
 - if you want to manually run 
 
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 191909428172.dkr.ecr.us-east-1.amazonaws.com
 ```
 
 - Then run the image
 
 ```bash
-docker run --name todo -dp 80:3000 <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest
+docker run --name todo -dp 80:3000 191909428172.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest
 ```
 - Delete the container 
 
@@ -275,7 +280,7 @@ Press "i" to edit
   pipeline {
     agent any
     environment {
-        ECR_REGISTRY = "<aws_account_id>.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway/to-do-app"
         PATH="/usr/local/bin/:${env.PATH}"
     }
@@ -337,7 +342,7 @@ aws ecs create-cluster --cluster-name to-do-app
 	"networkMode": "awsvpc",
 	"containerDefinitions": [{
 		"name": "to-do-app",
-		"image": "<aws-account-id>.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest",
+		"image": "191909428172.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest",
 		"portMappings": [{
 			"containerPort": 3000,
 			"protocol": "tcp"
@@ -349,7 +354,7 @@ aws ecs create-cluster --cluster-name to-do-app
 	],
 	"cpu": "256",
 	"memory": "512",
-        "executionRoleArn": "arn:aws:iam::<aws-account-id>:role/ecsTaskExecutionRole"
+        "executionRoleArn": "arn:aws:iam::191909428172:role/ecsTaskExecutionRole"
 }
 ```
 
@@ -368,7 +373,7 @@ aws ecs list-task-definitions
 - Create a service with following command.
 
 ```bash
-aws ecs create-service --cluster to-do-app --service-name to-do-app-service --task-definition to-do-app --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-077c9758],securityGroups=[sg-e29b36ce],assignPublicIp=ENABLED}" # change the subnets and security group and make sure that the 3000 port is open. 
+aws ecs create-service --cluster to-do-app --service-name to-do-app-service --task-definition to-do-app --desired-count 1 --launch-type "FARGATE" --network-configuration "awsvpcConfiguration={subnets=[subnet-0dc815baddadbaafa],securityGroups=[sg-0af5e1e0575604339],assignPublicIp=ENABLED}" # change the subnets and security group and make sure that the 3000 port is open. 
 ```
 
 > Note: securityGroups=[sg-e29b36ce] is default sg. If we don't specify any sg, aws assign default sg to the cluster.
@@ -379,7 +384,7 @@ aws ecs create-service --cluster to-do-app --service-name to-do-app-service --ta
 pipeline {
     agent any
     environment {
-        ECR_REGISTRY = "<aws-account-id>.dkr.ecr.us-east-1.amazonaws.com"
+        ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
         APP_REPO_NAME= "clarusway/to-do-app"
     }
     stages {
@@ -446,7 +451,7 @@ git push
 - If necessary, authenticate the Docker CLI to your default `ECR registry`.
 
 ```bash
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 191909428172.dkr.ecr.us-east-1.amazonaws.com
 ```
 
 - Delete the ECR repository `clarusway-repo/todo-app` from AWS CLI.
