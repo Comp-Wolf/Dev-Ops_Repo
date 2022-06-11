@@ -33,3 +33,5 @@ override.tf.json
 terraform.rc
 
 .terraform.lock.hcl
+
+ecr-ecs-ec2-jenkins.tf
