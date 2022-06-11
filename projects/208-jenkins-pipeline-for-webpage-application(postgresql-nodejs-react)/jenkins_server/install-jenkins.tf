@@ -85,5 +85,5 @@ resource "aws_security_group" "tf-jenkins-sec-gr" {
 output "jenkins-server" {
   value = "http://${aws_instance.tf-jenkins-server.public_dns}:8080"
   echo "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
-  sh "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+#  sh "sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
 }
