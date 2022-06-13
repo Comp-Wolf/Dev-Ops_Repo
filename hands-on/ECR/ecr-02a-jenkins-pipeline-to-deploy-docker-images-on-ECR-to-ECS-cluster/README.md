@@ -333,6 +333,10 @@ git push
 ```bash
 aws ecs create-cluster --cluster-name to-do-app
 ```
+- New AIM Role
+    create role clik, AWS service sec, ES2 sec, next, AmazonECSTaskExecutionRolePolicy sec,
+    Role name : ecsTaskExecutionRole
+    create role clik
 
 - Create a task definition file and name it as to-do-app.json.
 
