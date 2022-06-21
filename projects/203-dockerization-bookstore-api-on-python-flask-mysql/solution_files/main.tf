@@ -19,11 +19,7 @@ provider "aws" {
 
 provider "github" {
   # Configuration options
-<<<<<<< HEAD
   token = "*************"
-=======
-  token = "xxxxxxxxxxxxxxxxxxxxxxxxx"
->>>>>>> 9f0da428dad73c37a5ee2095b0d9f0858b66db50
 }
 
 resource "github_repository" "myrepo" {
@@ -71,11 +67,7 @@ resource "aws_instance" "tf-docker-ec2" {
           -o /usr/local/bin/docker-compose
           chmod +x /usr/local/bin/docker-compose
           mkdir -p /home/ec2-user/bookstore-api
-<<<<<<< HEAD
           TOKEN="**********"
-=======
-          TOKEN="xxxxxxxxxxxxxxxxxxxxxxx"
->>>>>>> 9f0da428dad73c37a5ee2095b0d9f0858b66db50
           FOLDER="https://$TOKEN@raw.githubusercontent.com/ofidan/bookstore-repo/main/"
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/app.py" -L "$FOLDER"bookstore-api.py
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/requirements.txt" -L "$FOLDER"requirements.txt
