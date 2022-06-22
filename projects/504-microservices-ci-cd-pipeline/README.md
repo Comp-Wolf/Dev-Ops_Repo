@@ -40,9 +40,9 @@ This project aims to create full CI/CD Pipeline for microservice based applicati
 | CI Server Setup | Prepare Jenkins Server | MSP-11 | Prepare Jenkins Server for CI/CD Pipeline. | feature/msp-11 |
 | CI Server Setup | Configure Jenkins Server for Project | MSP-12  | Configure Jenkins Server for Project Setup. | |
 | CI Server Setup | Prepare CI Pipeline | MSP-13 | Prepare CI pipeline (UT only) for all `dev` , `feature` and `bugfix` branches. | feature/msp-13 |
-| Registry Setup for Development | Create Docker Registry for Dev Manually | MSP-14  | Create Docker Registry on AWS ECR manually using Jenkins job. | feature/msp-14 |
-| QA Automation Setup for Development | Create a QA Automation Environment - Part-1 | MSP-15  | Create a QA Automation Environment with Kubernetes. | feature/msp-15 |
-| QA Automation Setup for Development | Create a QA Automation Environment - Part-2 | MSP-16  | Create a QA Automation Environment with Kubernetes. | feature/msp-16 |
+| Registry Setup for Development | Create Docker Registry for Dev Manually | MSP-14  | Create Docker Registry on AWS ECR manually using Jenkins job. | |
+| Registry Setup for Development | Prepare Script for Docker Registry| MSP-15  | Prepare a script to create Docker Registry on AWS ECR using Jenkins job. | feature/msp-15 |
+| QA Automation Setup for Development | Create a QA Automation Environment | MSP-16  | Create a QA Automation Environment with Kubernetes. | feature/msp-16 |
 | QA Automation Setup for Development | Prepare Petlinic Kubernetes YAML Files | MSP-17  | Prepare Petlinic Kubernetes YAML Files. | feature/msp-17 |
 | QA Automation Setup for Development | Prepare a QA Automation Pipeline | MSP-18  | Prepare a QA Automation Pipeline on `dev` branch for Nightly Builds. | feature/msp-18 |
 | QA Setup for Release | Create a Key Pair for QA Environment | MSP-19-1  | Create a permanent Key Pair for Ansible to be used in QA Environment on Release. | feature/msp-19 |
@@ -66,7 +66,6 @@ This project aims to create full CI/CD Pipeline for microservice based applicati
 
 ``` bash
 #! /bin/bash
-<<<<<<< HEAD
 sudo yum update -y
 sudo hostnamectl set-hostname petclinic-dev-server
 sudo amazon-linux-extras install docker -y
@@ -78,20 +77,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo yum install git -y
 sudo yum install java-11-amazon-corretto -y
 newgrp docker
-=======
-yum update -y
-hostnamectl set-hostname petclinic-dev-server
-amazon-linux-extras install docker -y
-systemctl start docker
-systemctl enable docker
-usermod -a -G docker ec2-user
-newgrp docker
-curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" \
--o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-yum install git -y
-yum install java-11-amazon-corretto -y
->>>>>>> 062fe3339063468743620e057c4314dece13eec4
 ```
 
 ## MSP 2 - Prepare GitHub Repository for the Project
@@ -121,13 +106,11 @@ git config --global user.email "alierdogan38@gmail.com"
 git config --global user.name "Comp-Wolf"
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://[your-token]@github.com/Comp-Wolf/Project_504_Microservices_Pipeline.git
+git remote add origin https://@github.com/Comp-Wolf/petclinic-microservices-with-db-ohio.git
 git push -u origin main
 ```
 * Prepare base branches namely `main`,  `dev`,  `release` for DevOps cycle.
-
   + Create `dev` base branch.
-
     ``` bash
     git checkout main
     git branch dev
@@ -602,7 +585,7 @@ git checkout dev
 git merge feature/msp-8
 git push origin dev
 ```
-
+--> docker-compose -f docker-compose-local.yml down
 ## MSP 9 - Setup Unit Tests and Configure Code Coverage Report
 
 * Create `feature/msp-9` branch from `dev`.
@@ -672,7 +655,6 @@ git push --set-upstream origin feature/msp-9
 ```
 
 * Update POM file at root folder for Code Coverage Report using `Jacoco` tool plugin.
-
 ``` xml
 <plugin>
     <groupId>org.jacoco</groupId>
@@ -699,6 +681,7 @@ git push --set-upstream origin feature/msp-9
 * Create code coverage report for only `customer-service` microservice locally on `Dev Server`. Execute the following command under the `spring-petclinic-customers-service folder`.
 
 ``` bash
+cd spring-petclinic-customers-service
 ../mvnw test
 ```
 
@@ -714,8 +697,8 @@ git push origin dev
 ```
 
 * Deploy code coverage report (located under relative path `target/site/jacoco` of the microservice) on Simple HTTP Server for only `customer-service` microservice on `Dev Server`.
-
 ``` bash
+cd target/site
 python -m SimpleHTTPServer # for python 2.7
 python3 -m http.server # for python 3+
 ```
