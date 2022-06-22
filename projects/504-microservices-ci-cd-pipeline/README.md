@@ -717,7 +717,6 @@ git checkout feature/msp-10
 * Create a folder for Selenium jobs with the name of `selenium-jobs`.
 ``` bash
 mkdir selenium-jobs
-
 ```
 
 * Create Selenium job (`QA Automation` test) for testing `Owners >> All` page and save it as `test_owners_all_headless.py` under `selenium-jobs` folder.
