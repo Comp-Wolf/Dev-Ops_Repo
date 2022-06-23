@@ -698,7 +698,7 @@ git push origin dev
 
 * Deploy code coverage report (located under relative path `target/site/jacoco` of the microservice) on Simple HTTP Server for only `customer-service` microservice on `Dev Server`.
 ``` bash
-cd target/site
+cd target/site/jacoco/
 python -m SimpleHTTPServer # for python 2.7
 python3 -m http.server # for python 3+
 ```
