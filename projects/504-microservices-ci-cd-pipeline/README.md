@@ -1731,9 +1731,6 @@ terraform --version
 ```
   * Click `Save`
 
-```bash
-git push --set-upstream origin feature/msp-16
-```
 - After running the job above, replace the script with the one below in order to test creating key pair for `ansible`.
 
 ```bash
