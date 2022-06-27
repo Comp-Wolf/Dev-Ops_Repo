@@ -102,11 +102,11 @@ rm -rf .git
 git init
 git add .
 git commit -m "first commit"
-git config --global user.email "alimattkey38@gmail.com"
+git config --global user.email "alierdogan38@gmail.com"
 git config --global user.name "Comp-Wolf"
-git commit -m "first commit"
+
 git branch -M main
-git remote add origin https://@github.com/Comp-Wolf/petclinic-microservices-with-db-ohio.git
+git remote add origin https://github.com/Comp-Wolf/petclinic-microservices-with-db.git
 git push -u origin main
 ```
 * Prepare base branches namely `main`,  `dev`,  `release` for DevOps cycle.
@@ -195,7 +195,7 @@ git branch feature/msp-5
 git checkout feature/msp-5
 ```
 
-* Create a folder for infrastructure setup with the name of `infrastructure` under `petclinic-microservices-with-db` folder.
+* Create a folder for infrastructure setup with the name of `infrastructure`.
 
 ``` bash
 mkdir infrastructure
@@ -1619,7 +1619,7 @@ resource "aws_instance" "kube-master" {
     instance_type = "t3a.medium"
     iam_instance_profile = module.iam.master_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-master-sg.id, aws_security_group.matt-kube-mutual-sg.id]
-    key_name = "mattkey"
+    key_name = "erdogan"
     subnet_id = "subnet-0229e7915aa78365b"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
@@ -1637,7 +1637,7 @@ resource "aws_instance" "worker-1" {
     instance_type = "t3a.medium"
         iam_instance_profile = module.iam.worker_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-worker-sg.id, aws_security_group.matt-kube-mutual-sg.id]
-    key_name = "mattkey"
+    key_name = "erdogan"
     subnet_id = "subnet-0229e7915aa78365b"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
@@ -1655,7 +1655,7 @@ resource "aws_instance" "worker-2" {
     instance_type = "t3a.medium"
     iam_instance_profile = module.iam.worker_profile_name
     vpc_security_group_ids = [aws_security_group.matt-kube-worker-sg.id, aws_security_group.matt-kube-mutual-sg.id]
-    key_name = "mattkey"
+    key_name = "erdogan"
     subnet_id = "subnet-0229e7915aa78365b"  # select own subnet_id of us-east-1a
     availability_zone = "us-east-1a"
     tags = {
@@ -1752,7 +1752,7 @@ sed -i "s/mattkey/$ANS_KEYPAIR/g" main.tf
 terraform init
 terraform apply -auto-approve
 ```
-buradakaldık
+
 - After running the job above, replace the script with the one below in order to test SSH connection with one of the instances.
 
 ```bash
@@ -2086,9 +2086,10 @@ ansible-playbook -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.yaml
 
 ```bash
 cd infrastructure/dev-k8s-terraform
+terraform init
 terraform destroy -auto-approve
 ```
-
+25-06-2022-burada kaldık ama hata aldım
 - After running the job above, replace the script with the one below in order to test deleting existing key pair using AWS CLI with following script.
 
 ```bash
@@ -2137,7 +2138,6 @@ git checkout dev
 git merge feature/msp-16
 git push origin dev
 ```
-
 ## MSP 17 - Prepare Petlinic Kubernetes YAML Files
 
 * Create `feature/msp-17` branch from `release`.
@@ -2315,7 +2315,7 @@ IMAGE_TAG_ADMIN_SERVER: "${IMAGE_TAG_ADMIN_SERVER}"
 IMAGE_TAG_HYSTRIX_DASHBOARD: "${IMAGE_TAG_HYSTRIX_DASHBOARD}"
 IMAGE_TAG_GRAFANA_SERVICE: "${IMAGE_TAG_GRAFANA_SERVICE}"
 IMAGE_TAG_PROMETHEUS_SERVICE: "${IMAGE_TAG_PROMETHEUS_SERVICE}"
-DNS_NAME: "DNS Name of your application"
+DNS_NAME: "erdoganali.net"
 ```
 
 ### Set up a Helm v3 chart repository in Amazon S3
@@ -2325,8 +2325,8 @@ DNS_NAME: "DNS Name of your application"
 * Create an S3 bucket for Helm charts. In the bucket, create a folder called stable/myapp. The example in this pattern uses s3://petclinic-helm-charts-<put-your-name>/stable/myapp as the target chart repository.
 
 ```bash
-aws s3api create-bucket --bucket petclinic-helm-charts-<put-your-name> --region us-east-1
-aws s3api put-object --bucket petclinic-helm-charts-<put-your-name> --key stable/myapp/
+aws s3api create-bucket --bucket petclinic-helm-charts-compwolf --region us-east-1
+aws s3api put-object --bucket petclinic-helm-charts-compwolf --key stable/myapp/
 ```
 
 * Install the helm-s3 plugin for Amazon S3.
@@ -2342,12 +2342,12 @@ sudo su -s /bin/bash jenkins
 export PATH=$PATH:/usr/local/bin
 helm version
 helm plugin install https://github.com/hypnoglow/helm-s3.git
+exit
 ``` 
 
 * Initialize the Amazon S3 Helm repository.
-
 ```bash
-AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/stable/myapp 
+AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-compwolf/stable/myapp 
 ```
 
 * The command creates an index.yaml file in the target to track all the chart information that is stored at that location.
@@ -2355,14 +2355,14 @@ AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/sta
 * Verify that the index.yaml file was created.
 
 ```bash
-aws s3 ls s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
+aws s3 ls s3://petclinic-helm-charts-compwolf/stable/myapp/
 ```
 
 * Add the Amazon S3 repository to Helm on the client machine. 
 
 ```bash
+AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-compwolf/stable/myapp/
 helm repo ls
-AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
 ```
 
 * Update `version` and `appVersion` field of `k8s/petclinic_chart/Chart.yaml` file as below for testing.
@@ -2442,8 +2442,8 @@ stable-petclinicapp/petclinic_chart     1.1.1           0.1.0           A Helm c
 * In Chart.yaml, set the `version` value to `HELM_VERSION` in Chart.yaml for automation in jenkins pipeline.
 
 * Commit the change, then push the script to the remote repo.
-
 ``` bash
+cd ..
 git add .
 git commit -m 'added Configuration YAML Files for Kubernetes Deployment'
 git push --set-upstream origin feature/msp-17
@@ -2530,7 +2530,7 @@ git add .
 git commit -m 'added scripts for qa automation environment'
 git push --set-upstream origin feature/msp-18
 ```
-
+27-06-2022_burada kaldı hoca.
   - OPTIONAL: Create a Jenkins job with the name of `test-msp-18-scripts` to test the scripts:
       * Select `Freestyle project` and click `OK`
       * Select github project and write the url to your repository's page into `Project url` (https://github.com/[your-github-account]/petclinic-microservices)
