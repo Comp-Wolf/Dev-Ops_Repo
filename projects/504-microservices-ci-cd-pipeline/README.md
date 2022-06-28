@@ -2315,7 +2315,7 @@ IMAGE_TAG_ADMIN_SERVER: "${IMAGE_TAG_ADMIN_SERVER}"
 IMAGE_TAG_HYSTRIX_DASHBOARD: "${IMAGE_TAG_HYSTRIX_DASHBOARD}"
 IMAGE_TAG_GRAFANA_SERVICE: "${IMAGE_TAG_GRAFANA_SERVICE}"
 IMAGE_TAG_PROMETHEUS_SERVICE: "${IMAGE_TAG_PROMETHEUS_SERVICE}"
-DNS_NAME: "erdoganali.net"
+DNS_NAME: "DNS Name of your application"
 ```
 
 ### Set up a Helm v3 chart repository in Amazon S3
@@ -2325,8 +2325,8 @@ DNS_NAME: "erdoganali.net"
 * Create an S3 bucket for Helm charts. In the bucket, create a folder called stable/myapp. The example in this pattern uses s3://petclinic-helm-charts-<put-your-name>/stable/myapp as the target chart repository.
 
 ```bash
-aws s3api create-bucket --bucket petclinic-helm-charts-compwolf --region us-east-1
-aws s3api put-object --bucket petclinic-helm-charts-compwolf --key stable/myapp/
+aws s3api create-bucket --bucket petclinic-helm-charts-<put-your-name> --region us-east-1
+aws s3api put-object --bucket petclinic-helm-charts-<put-your-name> --key stable/myapp/
 ```
 
 * Install the helm-s3 plugin for Amazon S3.
@@ -2342,12 +2342,12 @@ sudo su -s /bin/bash jenkins
 export PATH=$PATH:/usr/local/bin
 helm version
 helm plugin install https://github.com/hypnoglow/helm-s3.git
-exit
 ``` 
 
 * Initialize the Amazon S3 Helm repository.
+
 ```bash
-AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-compwolf/stable/myapp 
+AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/stable/myapp 
 ```
 
 * The command creates an index.yaml file in the target to track all the chart information that is stored at that location.
@@ -2355,14 +2355,14 @@ AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-compwolf/stable/mya
 * Verify that the index.yaml file was created.
 
 ```bash
-aws s3 ls s3://petclinic-helm-charts-compwolf/stable/myapp/
+aws s3 ls s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
 ```
 
 * Add the Amazon S3 repository to Helm on the client machine. 
 
 ```bash
-AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-compwolf/stable/myapp/
 helm repo ls
+AWS_REGION=us-east-1 helm repo add stable-petclinicapp s3://petclinic-helm-charts-<put-your-name>/stable/myapp/
 ```
 
 * Update `version` and `appVersion` field of `k8s/petclinic_chart/Chart.yaml` file as below for testing.
@@ -2442,8 +2442,8 @@ stable-petclinicapp/petclinic_chart     0.0.1           0.1.0           A Helm c
 * In Chart.yaml, set the `version` value to `HELM_VERSION` in Chart.yaml for automation in jenkins pipeline.
 
 * Commit the change, then push the script to the remote repo.
+
 ``` bash
-cd ..
 git add .
 git commit -m 'added Configuration YAML Files for Kubernetes Deployment'
 git push --set-upstream origin feature/msp-17
@@ -2530,7 +2530,7 @@ git add .
 git commit -m 'added scripts for qa automation environment'
 git push --set-upstream origin feature/msp-18
 ```
-27-06-2022_burada kaldı hoca.
+27-06-2022_burada kaldık
   - OPTIONAL: Create a Jenkins job with the name of `test-msp-18-scripts` to test the scripts:
       * Select `Freestyle project` and click `OK`
       * Select github project and write the url to your repository's page into `Project url` (https://github.com/[your-github-account]/petclinic-microservices)
