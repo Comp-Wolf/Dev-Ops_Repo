@@ -2138,8 +2138,8 @@ git checkout dev
 git merge feature/msp-16
 git push origin dev
 ```
+25-06-2022_burada kaldık
 ## MSP 17 - Prepare Petlinic Kubernetes YAML Files
-
 * Create `feature/msp-17` branch from `dev`.
 
 ``` bash
