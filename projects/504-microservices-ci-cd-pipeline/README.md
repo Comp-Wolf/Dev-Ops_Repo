@@ -2086,9 +2086,9 @@ ansible-playbook -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.yaml
 
 ```bash
 cd infrastructure/dev-k8s-terraform
-terraform init
 terraform destroy -auto-approve
 ```
+
 25-06-2022-burada kaldık ama hata aldım
 - After running the job above, replace the script with the one below in order to test deleting existing key pair using AWS CLI with following script.
 
