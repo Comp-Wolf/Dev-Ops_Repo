@@ -3785,7 +3785,7 @@ nano /home/ec2-user/.m2/settings.xml
 - Run following command; Created artifact will be stored in the nexus-releases repository.
 
 ```
-./mvnw clean deploy command
+./mvnw clean deploy
 ```
 
 - Note: if you want to redeploy the same artifact to release repository, you need to set Deployment policy : "Allow redeploy".
