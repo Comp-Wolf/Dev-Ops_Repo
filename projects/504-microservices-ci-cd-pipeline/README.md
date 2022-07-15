@@ -106,26 +106,26 @@ git config --global user.email "alierdogan38@gmail.com"
 git config --global user.name "Comp-Wolf"
 
 git branch -M main
-git remote add origin https://github.com/Comp-Wolf/petclinic-microservices-with-db.git
+git remote add origin https://github.com/Comp-Wolf/petclinic-microservices-with-db2.git
 git push -u origin main
 ```
 * Prepare base branches namely `main`,  `dev`,  `release` for DevOps cycle.
   + Create `dev` base branch.
-    ``` bash
-    git checkout main
-    git branch dev
-    git checkout dev
-    git push --set-upstream origin dev
-    ```
+``` bash
+git checkout main
+git branch dev
+git checkout dev
+git push --set-upstream origin dev
+```
 
   + Create `release` base branch.
 
-    ```bash
-    git checkout main
-    git branch release
-    git checkout release
-    git push --set-upstream origin release
-    ```
+```bash
+git checkout main
+git branch release
+git checkout release
+git push --set-upstream origin release
+```
 
 ## MSP 3 - Check the Maven Build Setup on Dev Branch
 
