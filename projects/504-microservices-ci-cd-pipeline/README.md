@@ -596,8 +596,12 @@ git branch feature/msp-9
 git checkout feature/msp-9
 ```
 
-* Create following unit tests for `Pet.java` under `customer-service` microservice using the following `PetTest` class and save it as `PetTest.java` under `./spring-petclinic-customers-service/src/test/java/org/springframework/samples/petclinic/customers/model/` folder.
+* Create following unit tests for `PetTest.java` under `customer-service` microservice using the following `PetTest` class and save it as `PetTest.java` under `./spring-petclinic-customers-service/src/test/java/org/springframework/samples/petclinic/customers/model/` folder.
 
+``` bash
+cd ./spring-petclinic-customers-service/src/test/java/org/springframework/samples/petclinic/customers/
+mkdir model
+PetTest.java dosyasını oluştur.
 ``` java
 package org.springframework.samples.petclinic.customers.model;
 
@@ -643,6 +647,7 @@ public class PetTest {
 * Implement unit tests with maven wrapper for only `customer-service` microservice locally on `Dev Server`. Execute the following command under the `spring-petclinic-customers-service folder`.
 
 ``` bash
+cd spring-petclinic-customers-service
 ../mvnw clean test
 ```
 
@@ -654,7 +659,8 @@ git commit -m 'added 3 UTs for customer-service'
 git push --set-upstream origin feature/msp-9
 ```
 
-* Update POM file at root folder for Code Coverage Report using `Jacoco` tool plugin.
+* Update POM file at root folder for Code Coverage Report using `Jacoco` tool plugin. 
+pom.xml nin 87. satırından sonrasına ekliyoruz.
 ``` xml
 <plugin>
     <groupId>org.jacoco</groupId>
@@ -1038,6 +1044,10 @@ git checkout feature/msp-14
 
 * Create a Jenkins Job and name it as `create-ecr-docker-registry-for-dev` to create Docker Registry for `dev` on AWS ECR manually.
 
+* Create a Jenkins job with the name of `create-ecr-docker-registry-for-dev`: 
+  * Select `Freestyle project` and click `OK`
+  * Click `Discard old builds` under `3` and select `3`
+  * Click `Add build step` under `Build` and select `Execute Shell`
 ``` bash
 PATH="$PATH:/usr/local/bin"
 APP_REPO_NAME="clarusway-repo/petclinic-app-dev"
@@ -1049,6 +1059,8 @@ aws ecr create-repository \
   --image-tag-mutability MUTABLE \
   --region ${AWS_REGION}
 ```
+  * Click `Save`
+
 
 * Prepare a script to create Docker Registry for `dev` on AWS ECR and save it as `create-ecr-docker-registry-for-dev.sh` under `infrastructure` folder.
 
@@ -1094,7 +1106,7 @@ mkdir infrastructure/dev-k8s-terraform
 - Create a folder for roles of master and worker nodes with the name of `IAM` under the `infrastructure/dev-k8s-terraform/modules` folder.
 
 ```bash
-mkdir -p infrastructure/dev-k8s-terraform/modules/IAM
+mkdir -p infrastructure/dev-k8s-terraform/modules/IAM & touch infrastructure/dev-k8s-terraform/modules/IAM/policy_for_master.json
 ```
 
 - Create iam policy file for the master node with the name of `policy_for_master.json`  under the `infrastructure/dev-k8s-terraform/modules/IAM`.
@@ -1246,6 +1258,10 @@ mkdir -p infrastructure/dev-k8s-terraform/modules/IAM
 ```
 
 - Create iam policy file for the worker node with the name of `policy_for_worker.json`  under the `infrastructure/dev-k8s-terraform/modules/IAM`.
+
+```bash
+mkdir -p infrastructure/dev-k8s-terraform/modules/IAM & touch infrastructure/dev-k8s-terraform/modules/IAM/policy_for_worker.json
+```
 
 ```json
 {
@@ -1757,15 +1773,17 @@ terraform apply -auto-approve -no-color
 
 ```bash
 ANS_KEYPAIR="call-ansible-test-dev.key"
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${WORKSPACE}/${ANS_KEYPAIR} ubuntu@172.31.91.243 hostname
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i ${WORKSPACE}/${ANS_KEYPAIR} ubuntu@172.31.91.235 hostname
 ```
 
 - Prepare static inventory file with name of `hosts.ini` for Ansible under `ansible/inventory` folder using Docker machines private IP addresses.
 
+mkdir -p ansible/inventory & touch ansible/inventory/hosts.ini
+
 ```ini
-172.31.91.243   ansible_user=ubuntu  
-172.31.87.143   ansible_user=ubuntu
-172.31.90.30    ansible_user=ubuntu
+172.31.94.38    ansible_user=ubuntu  
+172.31.91.235   ansible_user=ubuntu
+172.31.94.117   ansible_user=ubuntu
 ```
 
 - Commit the change, then push to the remote repo.
@@ -1841,6 +1859,7 @@ ansible -i ./ansible/inventory/dev_stack_dynamic_inventory_aws_ec2.yaml all -m p
 
 - Create a `ClusterConfiguration file` and save it as `clusterconfig-base.yml` under `ansible/playbooks` folder.
 
+mkdir -p ansible/playbooks & touch ansible/playbooks/clusterconfig-base.yml
 ```yml
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -1875,6 +1894,7 @@ cgroupDriver: systemd
 
 - Create a yaml file for Kubernetes `StorageClass` object and name it as `storage.yml` under `ansible/playbooks` folder.
 
+mkdir -p ansible/playbooks & touch ansible/playbooks/storage.yml
 ```yaml
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
@@ -1896,7 +1916,7 @@ allowedTopologies:
 
 - Create an ansible playbook to install kubernetes and save it as `k8s_setup.yaml` under `ansible/playbooks` folder.
 
-```yaml
+mkdir -p ansible/playbooks & touch ansible/playbooks/k8s_setup.yaml
 ---
 - hosts: all
   become: true
@@ -2090,7 +2110,6 @@ cd infrastructure/dev-k8s-terraform
 terraform destroy -auto-approve -no-color
 ```
 
-25-06-2022-burada kaldık ama hata aldım
 - After running the job above, replace the script with the one below in order to test deleting existing key pair using AWS CLI with following script.
 
 ```bash
@@ -2139,7 +2158,6 @@ git checkout dev
 git merge feature/msp-16
 git push origin dev
 ```
-25-06-2022_burada kaldık
 ## MSP 17 - Prepare Petlinic Kubernetes YAML Files
 * Create `feature/msp-17` branch from `dev`.
 
@@ -2153,6 +2171,7 @@ git checkout feature/msp-17
 
 * Create a `docker-compose.yml` under `k8s` folder with the following content as to be used in conversion the k8s files.
 
+mkdir -p k8s/ & touch k8s/docker-compose.yml
 ```yaml
 version: '3'
 services:
@@ -2262,8 +2281,7 @@ helm version
 * Create an helm chart named `petclinic_chart` under `k8s` folder.
 
 ```bash
-cd k8s
-helm create petclinic_chart
+cd k8s & helm create petclinic_chart
 ```
 
 * Remove all files under the petclinic_chart/templates folder.
@@ -2320,6 +2338,10 @@ DNS_NAME: "DNS Name of your application"
 ```
 
 ### Set up a Helm v3 chart repository in Amazon S3
+
+```bash
+cd ..
+```
 
 * This pattern helps you to manage Helm v3 charts efficiently by integrating the Helm v3 repository into Amazon Simple Storage Service (Amazon S3) on the Amazon Web Services (AWS) Cloud. (https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/set-up-a-helm-v3-chart-repository-in-amazon-s3.html)
 
