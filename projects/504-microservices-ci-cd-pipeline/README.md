@@ -2370,6 +2370,7 @@ helm plugin install https://github.com/hypnoglow/helm-s3.git
 * Initialize the Amazon S3 Helm repository.
 
 ```bash
+exit
 AWS_REGION=us-east-1 helm s3 init s3://petclinic-helm-charts-<put-your-name>/stable/myapp 
 ```
 
@@ -2405,7 +2406,7 @@ helm package petclinic_chart/
 * Store the local package in the Amazon S3 Helm repository.
 
 ```bash
-HELM_S3_MODE=3 AWS_REGION=us-east-1 helm s3 push ./petclinic_chart-1.1.1.tgz stable-petclinicapp
+HELM_S3_MODE=3 AWS_REGION=us-east-1 helm s3 push ./petclinic_chart-0.0.1.tgz stable-petclinicapp
 ```
 
 * Search for the Helm chart.
@@ -2430,7 +2431,7 @@ helm package petclinic_chart/
 * Push the new version to the Helm repository in Amazon S3.
 
 ```bash
-HELM_S3_MODE=3 AWS_REGION=us-east-1 helm s3 push ./petclinic_chart-1.1.2.tgz stable-petclinicapp
+HELM_S3_MODE=3 AWS_REGION=us-east-1 helm s3 push ./petclinic_chart-0.0.2.tgz stable-petclinicapp
 ```
 
 * Verify the updated Helm chart.
@@ -2467,6 +2468,7 @@ stable-petclinicapp/petclinic_chart     0.0.1           0.1.0           A Helm c
 * Commit the change, then push the script to the remote repo.
 
 ``` bash
+cd ..
 git add .
 git commit -m 'added Configuration YAML Files for Kubernetes Deployment'
 git push --set-upstream origin feature/msp-17
@@ -2553,7 +2555,7 @@ git add .
 git commit -m 'added scripts for qa automation environment'
 git push --set-upstream origin feature/msp-18
 ```
-27-06-2022_burada kaldık
+
   - OPTIONAL: Create a Jenkins job with the name of `test-msp-18-scripts` to test the scripts:
       * Select `Freestyle project` and click `OK`
       * Select github project and write the url to your repository's page into `Project url` (https://github.com/[your-github-account]/petclinic-microservices)
