@@ -2566,9 +2566,9 @@ git push --set-upstream origin feature/msp-18
       * Write below script into the `Command`
         ```bash
         PATH="$PATH:/usr/local/bin"
-        APP_REPO_NAME="clarusway-repo/petclinic-app-dev" # Write your own repo name
+        APP_REPO_NAME="clarusway-repo/petclinic-app-dev1" # Write your own repo name
         AWS_REGION="us-east-1" #Update this line if you work on another region
-        ECR_REGISTRY="046402772087.dkr.ecr.us-east-1.amazonaws.com" # Replace this line with your ECR name
+        ECR_REGISTRY="210785755454.dkr.ecr.us-east-1.amazonaws.com" # Replace this line with your ECR name
         aws ecr create-repository \
             --repository-name ${APP_REPO_NAME} \
             --image-scanning-configuration scanOnPush=false \
@@ -2654,6 +2654,7 @@ driver.close()
 
 - Prepare a script to run the playbook for dummy selenium job on Jenkins Server (localhost) and save it as `run_dummy_selenium_job.sh` under `ansible/scripts` folder.
 
+mkdir -p ansible/scripts/
 ```bash
 PATH="$PATH:/usr/local/bin"
 ansible-playbook --connection=local --inventory 127.0.0.1, --extra-vars "workspace=${WORKSPACE}" ./ansible/playbooks/pb_run_dummy_selenium_job.yaml
@@ -2679,6 +2680,7 @@ git push --set-upstream origin feature/msp-18
 
 - Create Ansible playbook for running all selenium jobs under `selenium-jobs` folder and save it as `pb_run_selenium_jobs.yaml` under `ansible/playbooks` folder.
 
+touch ansible/playbooks/pb_run_selenium_jobs.yaml
 ```yaml
 - hosts: all
   tasks:
@@ -2703,6 +2705,7 @@ url = "http://"+APP_IP.strip()+":30001/"
  
 - Prepare a script to run the playbook for all selenium jobs on Jenkins Server (localhost) and save it as `run_selenium_jobs.sh` under `ansible/scripts` folder.
 
+touch ansible/scripts/run_selenium_jobs.sh
 ```bash
 PATH="$PATH:/usr/local/bin"
 ansible-playbook -vvv --connection=local --inventory 127.0.0.1, --extra-vars "workspace=${WORKSPACE} master_public_ip=${MASTER_PUBLIC_IP}" ./ansible/playbooks/pb_run_selenium_jobs.yaml
@@ -2710,6 +2713,7 @@ ansible-playbook -vvv --connection=local --inventory 127.0.0.1, --extra-vars "wo
 
 - Prepare a Jenkinsfile for `petclinic-nightly` builds and save it as `jenkinsfile-petclinic-nightly` under `jenkins` folder.
 
+touch jenkins/jenkinsfile-petclinic-nightly
 ```groovy
 pipeline {
     agent any
@@ -2880,7 +2884,7 @@ pipeline {
 }
 ```
 
-- Create a Jenkins pipeline with the name of `petclinic-nightly` with the following script to run QA automation tests and configure a `cron job` to trigger the pipeline every night at midnight (`0 0 * * *`) on the `dev` branch. Input `jenkins/jenkinsfile-petclinic-nightly` to the `Script Path` field. Petclinic nightly build pipeline should be built on a temporary QA automation environment.
+- Create a Jenkins `pipeline` with the name of `petclinic-nightly` with the following script to run QA automation tests and configure a `cron job` to trigger the pipeline every night at midnight (`0 0 * * *`) on the `dev` branch. Input `jenkins/jenkinsfile-petclinic-nightly` to the `Script Path` field. Petclinic nightly build pipeline should be built on a temporary QA automation environment.
 
 - Commit the change, then push the script to the remote repo.
 
@@ -3563,8 +3567,8 @@ rke --version
 
 ```yaml
 nodes:
-  - address: 172.31.82.64
-    internal_address: 172.31.82.64
+  - address: 172.31.91.56
+    internal_address: 172.31.91.56
     user: ubuntu
     role:
       - controlplane
@@ -3643,7 +3647,7 @@ kubectl create namespace cattle-system
 ```bash
 helm install rancher rancher-latest/rancher \
   --namespace cattle-system \
-  --set hostname=rancher.erdoganali.net \  <rancher için tanımladığımız domain adresi yaz>
+  --set hostname=rancher.erdoganali.net \
   --set tls=external \
   --set replicas=1
 ```
@@ -3808,11 +3812,7 @@ nano /home/ec2-user/.m2/settings.xml
 
 - Run following command; Created artifact will be stored in the nexus-releases repository.
 
-<<<<<<< HEAD
-```
-=======
 ```bash
->>>>>>> 935147ead13b4994a1c352699e9aad6c09e8296a
 ./mvnw clean deploy
 ```
 
@@ -3956,7 +3956,7 @@ pipeline {
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-        RANCHER_URL="https://rancher.clarusway.us"
+        RANCHER_URL="https://rancher.erdoganali.net"
         // Get the project-id from Rancher UI (projects/namespaces --> petclinic-cluster-staging namespace --> Edit yaml --> copy projectId )
         RANCHER_CONTEXT="petclinic-cluster:project-id" 
        //First part of projectID
@@ -4023,9 +4023,9 @@ pipeline {
                 sh "rm -f k8s/config"
                 sh "rancher cluster kf $CLUSTERID > k8s/config"
                 sh "chmod 400 k8s/config"
-                sh "helm repo add stable-petclinic s3://petclinic-helm-charts/stable/myapp/"
+                sh "helm repo add stable-petclinic s3://petclinic-helm-charts-compwolf/stable/myapp/"
                 sh "helm package k8s/petclinic_chart"
-                sh "helm s3 push petclinic_chart-${BUILD_NUMBER}.tgz stable-petclinic"
+                sh "helm s3 push --force petclinic_chart-${BUILD_NUMBER}.tgz stable-petclinic"
                 sh "helm repo update"
                 sh "AWS_REGION=$AWS_REGION helm upgrade --install petclinic-app-release stable-petclinic/petclinic_chart --version ${BUILD_NUMBER} --namespace petclinic-staging-ns --kubeconfig k8s/config"
             }
@@ -4197,7 +4197,7 @@ pipeline {
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-        RANCHER_URL="https://rancher.clarusway.us"
+        RANCHER_URL="https://rancher.erdoganali.net"
         // Get the project-id from Rancher UI (petclinic-cluster-staging namespace, View in API, copy projectId )
         RANCHER_CONTEXT="petclinic-cluster:project-id" 
        //First part of projectID
