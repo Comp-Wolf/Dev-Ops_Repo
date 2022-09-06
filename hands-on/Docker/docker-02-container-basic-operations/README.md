@@ -159,7 +159,7 @@ sudo ls -al  /var/lib/docker/volumes/cw-vol/_data
 - Run a `alpine` container with interactive shell open, name the container as `clarus`, attach the volume `cw-vol` to `/cw` mount point in the container, and add command to run alpine shell. Here, explain `--volume` and `v` flags.
 
 ```bash
-docker run -it --name clarus -v cw-vol:/cw alpine ash
+docker run -it --name clarus -v cw-vol:/cw alpine ash ## -i interactif terminal demek -t TTA modunda sana cevap verebilecek terminal açacak ?   ##run = creat + start
 ```
 
 - List files/folder in `clarus` container, show mounting point `/cw`, and explain the mounted volume `cw-vol`.
