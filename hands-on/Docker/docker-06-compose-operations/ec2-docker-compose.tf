@@ -5,20 +5,16 @@
 
 provider "aws" {
   region = "us-east-1"
-<<<<<<< HEAD
-  access_key = "**********"
-  secret_key = "**********"
-=======
   #access_key = ""
   #secret_key = ""
->>>>>>> 93d264d033465e6cabc25589b9f63497c345e9c2
   //  If you have entered your credentials in AWS CLI before, you do not need to use these arguments.
 }
+## bu kısmı yazmayacağız
 
 resource "aws_instance" "docker-server" {
   ami             = "ami-02e136e904f3da870"
   instance_type   = "t2.micro"
-  key_name        = "walter-pem"
+  key_name        = "FirstKey"
   //  Write your pem file name
   vpc_security_group_ids = [aws_security_group.sec-gr.id]
   tags = {
