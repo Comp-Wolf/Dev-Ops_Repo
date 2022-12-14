@@ -116,7 +116,7 @@ Bookstore Web API Application aims to create a bookstore web service using Docke
 
 ## Steps to Solution
   
-- Step 1: Download or clone project definition from `clarusway-aws-workshop` repo on Github
+- Step 1: Download or clone project definition from `clww-aws-workshop` repo on Github
 
 - Step 2: Create project folder for local public repo on your pc
 
