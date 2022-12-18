@@ -120,7 +120,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clww/cw_web_flask1
         ports:
         - containerPort: 5000
 ```
@@ -160,7 +160,7 @@ metadata:
 spec:
   containers:
   - name: forcurl
-    image: clarusway/forping
+    image: clww/forping
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
 ```
@@ -286,7 +286,7 @@ metadata:
 spec:
   containers:
   - name: clarus-db
-    image: clarusway/clarusdb
+    image: clww/clarusdb
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
 ```
@@ -478,7 +478,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clww/cw_web_flask1
         ports:
         - containerPort: 5000
 ```
@@ -519,7 +519,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clww/cw_web_flask1
         ports:
         - containerPort: 5000
 ```
@@ -582,7 +582,7 @@ spec:
     spec:
       containers:
       - name: web-flask-pod
-        image: clarusway/cw_web_flask1
+        image: clww/cw_web_flask1
         ports:
         - containerPort: 5000
 ```

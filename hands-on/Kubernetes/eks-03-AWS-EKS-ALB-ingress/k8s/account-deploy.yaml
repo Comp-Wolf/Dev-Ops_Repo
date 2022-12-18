@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: account
-        image: clarusway/clarusshop-account
+        image: clww/clarusshop-account
         ports:
         - containerPort: 80

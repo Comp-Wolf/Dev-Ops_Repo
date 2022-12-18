@@ -35,7 +35,7 @@ mkdir clarusweb-nginx && cd clarusweb-nginx
 - Create an index.html file.
 
 ```bash
-echo "<h1>Welcome to Clarusway<h1>" > index.html
+echo "<h1>Welcome to clww<h1>" > index.html
 ```
 
 - Create a Dockerfile and input following statements.
@@ -80,7 +80,7 @@ mkdir clarusweb-env && cd clarusweb-env
 <title>clarusweb</title>
 </head>
 <body style="background-color:COLOR;">
-<h1>Welcome to Clarusway<h1>
+<h1>Welcome to clww<h1>
 </body>
 </html>
 ```
@@ -138,7 +138,7 @@ mkdir clarusweb-arg && cd clarusweb-arg
 <title>clarusweb</title>
 </head>
 <body style="background-color:COLOR;">
-<h1>Welcome to Clarusway<h1>
+<h1>Welcome to clww<h1>
 </body>
 </html>
 ```

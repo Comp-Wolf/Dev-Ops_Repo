@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <div>
       <div className="text-center">
-        <img src={cw} alt="clarusway" className="cw" />
+        <img src={cw} alt="clww" className="cw" />
         <h6 className="text-center mt-5">
-          This app has been developed by Clarusway Developers.
+          This app has been developed by clww Developers.
         </h6>
         <h1 className="text-center mt-5 header-text">Clarus Todos</h1>
       </div>

@@ -15,7 +15,7 @@ spec:
         app: resultserver-deploy
     spec:
       containers:
-      - image: jamesclarusway/resultserver
+      - image: jamesclww/resultserver
         name: resultserver
         ports:
           - containerPort: 80

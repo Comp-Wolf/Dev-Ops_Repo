@@ -15,13 +15,13 @@ spec:
         app: webserver-deploy
     spec:
       containers:
-      - image: jamesclarusway/webserver
+      - image: jamesclww/webserver
         name: webserver
         ports:
           - containerPort: 80
         env:
         - name: MYSQL_PASSWORD
-          # value: Clarusway_1
+          # value: clww_1
           valueFrom:
             secretKeyRef:
               name: mysql-secret

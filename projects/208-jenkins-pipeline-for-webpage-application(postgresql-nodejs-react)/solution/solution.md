@@ -306,7 +306,7 @@ output "postgre_private_ip" {
   vars:
     postgre_container: /home/ec2-user/postgresql
     container_name: oliver_postgre
-    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/cw-todo-app:postgr
+    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clww-repo/cw-todo-app:postgr
   tasks:
     - name: remove {{ container_name }} container and {{ image_name }} if exists
       shell: "docker ps -q --filter 'name={{ container_name }}' && docker stop {{ container_name }} && docker rm -fv {{ container_name }} && docker image rm -f {{ image_name }} || echo 'Not Found'"
@@ -329,7 +329,7 @@ output "postgre_private_ip" {
   vars:
     container_path: /home/ec2-user/nodejs
     container_name: oliver_nodejs
-    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/cw-todo-app:nodejs
+    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clww-repo/cw-todo-app:nodejs
   tasks:
     - name: remove {{ container_name }} container and {{ image_name }} if exists
       shell: "docker ps -q --filter 'name={{ container_name }}' && docker stop {{ container_name }} && docker rm -fv {{ container_name }} && docker image rm -f {{ image_name }} || echo 'Not Found'"
@@ -348,7 +348,7 @@ output "postgre_private_ip" {
   vars:
     container_path: /home/ec2-user/react
     container_name: oliver_react
-    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clarusway-repo/cw-todo-app:react
+    image_name: 046402772087.dkr.ecr.us-east-1.amazonaws.com/clww-repo/cw-todo-app:react
   tasks:
     - name: remove {{ container_name }} container and {{ image_name }} image if exists
       shell: "docker ps -q --filter 'name={{ container_name }}' && docker stop {{ container_name }} && docker rm -fv {{ container_name }} && docker image rm -f {{ image_name }} || echo 'Not Found'"
@@ -433,7 +433,7 @@ pipeline {
         AWS_REGION = "us-east-1"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
-        APP_REPO_NAME = "clarusway-repo/cw-todo-app"
+        APP_REPO_NAME = "clww-repo/cw-todo-app"
         APP_NAME = "todo"
         HOME_FOLDER = "/home/ec2-user"
         GIT_FOLDER = sh(script:'echo ${GIT_URL} | sed "s/.*\\///;s/.git$//"', returnStdout:true).trim()
@@ -515,7 +515,7 @@ pipeline {
         // stage('Test the Infrastructure') {
 
         //      steps {
-        //          echo "Testing if the Clarusway TODO app is ready or not, by checking Public Ip Address of react instance"
+        //          echo "Testing if the clww TODO app is ready or not, by checking Public Ip Address of react instance"
         //          script {
         //          while(true) {
 

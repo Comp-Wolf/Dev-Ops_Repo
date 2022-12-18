@@ -48,7 +48,7 @@ metadata:
 spec:
   containers:
   - name: liveness
-    image: clarusway/probes
+    image: clww/probes
     livenessProbe:
       httpGet:
         path: /healthz
@@ -135,7 +135,7 @@ metadata:
 spec:
   containers:
   - name: liveness
-    image: clarusway/probes
+    image: clww/probes
     args:
     - /bin/sh
     - -c
@@ -254,7 +254,7 @@ metadata:
 spec:
   containers:
   - name: liveness
-    image: clarusway/startupprobe
+    image: clww/startupprobe
     livenessProbe:
       httpGet:
         path: /healthz
@@ -285,7 +285,7 @@ spec:
 > **failureThreshold:** When a probe fails, Kubernetes will try `failureThreshold` times before giving up. 
 
 
-- In this image (clarusway/startupprobe), for the `first 60 seconds` the container returns a status of 500. Than the container will return a status of `200`. 
+- In this image (clww/startupprobe), for the `first 60 seconds` the container returns a status of 500. Than the container will return a status of `200`. 
 
 ```py
 app = Flask(__name__)
@@ -294,7 +294,7 @@ start = time.time()
 
 @app.route('/')
 def home():
-    return "Welcome to Clarusway Kubernetes Lesson"
+    return "Welcome to clww Kubernetes Lesson"
 
 @app.route("/healthz")
 def health_check():
@@ -358,7 +358,7 @@ spec:
     spec:
       containers:
       - name: readiness
-        image: clarusway/probes
+        image: clww/probes
         ports:
         - containerPort: 80
         readinessProbe:

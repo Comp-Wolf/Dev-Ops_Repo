@@ -96,7 +96,7 @@ $ scp -i <pem file> <pem file> ec2-user@<public DNS name of the control node>:/h
 ansible-playbook playbook1.yml
 ```
 
-- Create a text file named "testfile1" and write "Hello Clarusway" with using vim. Then create a yaml file name "playbook2.yml" and send the "testfile1" to the hosts. 
+- Create a text file named "testfile1" and write "Hello clww" with using vim. Then create a yaml file name "playbook2.yml" and send the "testfile1" to the hosts. 
 
 ```yml
 ---
@@ -259,7 +259,7 @@ vim playbook6.yml
 
    - name: index.html
      copy:
-       content: "<h1>Hello Clarusway</h1>"
+       content: "<h1>Hello clww</h1>"
        dest: /var/www/html/index.html
 
    - name: restart apache2

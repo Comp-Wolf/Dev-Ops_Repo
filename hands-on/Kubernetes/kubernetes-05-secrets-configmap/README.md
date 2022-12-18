@@ -267,7 +267,7 @@ root@secret-env-pod:/data# echo $SECRET_PASSWORD
 - For the show case we will select a simple application that displays a message like this.
 
 ```text
-Hello, Clarusway!
+Hello, clww!
 ```
 
 - We will parametrized the "Hello" portion in some languages.
@@ -300,7 +300,7 @@ spec:
     spec:
       containers:
         - name: demo
-          image: clarusway/demo:hello
+          image: clww/demo:hello
           ports:
           - containerPort: 8888
 ```
@@ -348,7 +348,7 @@ NAME           TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE    
 demo-service  NodePort       10.97.39.39     <pending>   80:30001/TCP   2m20s   app=demo
 
 $ curl < worker-ip >:30001
-Hello, Clarusway!
+Hello, clww!
 ```
 This is the default container behaviour.
 
@@ -381,7 +381,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-args
+          image: clww/demo:hello-config-args
           imagePullPolicy: Always
           args:
             - "-greeting"
@@ -424,7 +424,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-args
+          image: clww/demo:hello-config-args
           imagePullPolicy: Always
           args:
             - "-greeting"
@@ -496,7 +496,7 @@ kubernetes     ClusterIP      10.96.0.1      <none>        443/TCP        46d   
 
 ```bash
 $ curl < worker-ip >:30001
-Halo, Clarusway!
+Halo, clww!
 ```
 
 - Reset what we have created.
@@ -596,7 +596,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-file
+          image: clww/demo:hello-config-file
           ports:
             - containerPort: 8888
           volumeMounts:
@@ -633,7 +633,7 @@ demo-service   NodePort    10.108.181.197   <none>        80:30001/TCP   11s   a
 kubernetes     ClusterIP   10.96.0.1        <none>        443/TCP        14h   <none>
 
 $ curl < worker-ip >:30001
-Hei, Clarusway!
+Hei, clww!
 ```
 
 - Reset what we have created.
@@ -687,7 +687,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-file
+          image: clww/demo:hello-config-file
           ports:
             - containerPort: 8888
           volumeMounts:
@@ -720,7 +720,7 @@ NAME           TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE 
 demo-service   LoadBalancer   10.107.176.127   <pending>     80:30001/TCP   16s   app=demo
 kubernetes     ClusterIP      10.96.0.1        <none>        443/TCP        46d   <none>
 $ curl < worker-ip >:30001
-Buongiorno, Clarusway!
+Buongiorno, clww!
 ```
 
 - Reset what we have created.
@@ -765,7 +765,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-env
+          image: clww/demo:hello-config-env
           ports:
             - containerPort: 8888
           env:
@@ -790,7 +790,7 @@ demo-service   NodePort    10.102.145.186   <none>        80:30001/TCP   5s
 kubernetes     ClusterIP   10.96.0.1        <none>        443/TCP        14h
 
 $ curl < worker-ip >:30001
-Hola, Clarusway!
+Hola, clww!
 ```
 
 - Reset what we have created.
@@ -838,7 +838,7 @@ spec:
     spec:
       containers:
         - name:  demo
-          image: clarusway/demo:hello-config-env
+          image: clww/demo:hello-config-env
           ports:
             - containerPort: 8888
           envFrom:
@@ -871,7 +871,7 @@ demo-service   LoadBalancer   10.110.195.109   <pending>     80:32711/TCP   17s
 kubernetes     ClusterIP      10.96.0.1        <none>        443/TCP        46d
 
 $ curl < worker-ip >:32711
-Merhaba, Clarusway!
+Merhaba, clww!
 ```
 
 Everything works fine!
@@ -888,4 +888,4 @@ service "demo-service" deleted
 
 Here is the challenge:
 
-* Use our hello app from clarusway repo. And to call the $GREETINGS env use secrets.
+* Use our hello app from clww repo. And to call the $GREETINGS env use secrets.

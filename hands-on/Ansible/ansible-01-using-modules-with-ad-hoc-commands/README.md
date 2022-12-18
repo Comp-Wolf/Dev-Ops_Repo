@@ -211,7 +211,7 @@ $ vi testfile    # Create a text file name "testfile"
 
 ```bash
 $ ansible comp-wolf -m copy -a "src=/etc/ansible/testfile dest=/home/ec2-user/testfile"
-$ ansible node1 -m shell -a "echo Hello Clarusway > /home/ec2-user/testfile2 ; cat testfile2"
+$ ansible node1 -m shell -a "echo Hello clww > /home/ec2-user/testfile2 ; cat testfile2"
 ```
 
 - Connect to Node1 and show the files and their content.
@@ -235,7 +235,7 @@ node3 ansible_host=<node3_ip> ansible_user=ubuntu
 ```bash
 $ ansible all --list-hosts
 $ ansible all -m ping -o
-$ ansible all -m shell -a "echo Hello Clarusway > /home/ubuntu/testfile3"
+$ ansible all -m shell -a "echo Hello clww > /home/ubuntu/testfile3"
 ```
 
 - Explain the error below. Emphasize that the infrastructures we provision need different configurations.
@@ -249,8 +249,8 @@ web_server2 | CHANGED | rc=0 >>
 - So refactor the commands as shown below.
 
 ```bash
-$ ansible node3 -m shell -a "echo Hello Clarusway > /home/ubuntu/testfile3"
-$ ansible node1:node2 -m shell -a "echo Hello Clarusway > /home/ec2-user/testfile3"
+$ ansible node3 -m shell -a "echo Hello clww > /home/ubuntu/testfile3"
+$ ansible node1:node2 -m shell -a "echo Hello clww > /home/ec2-user/testfile3"
 ```
 
 - Emphasize the ```:``` sign between the hosts.

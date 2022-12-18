@@ -354,7 +354,7 @@ spec:
     spec:
       containers:
       - name: container-info
-        image: clarusway/container-info:1.0
+        image: clww/container-info:1.0
         ports:
         - containerPort: 80
 ```

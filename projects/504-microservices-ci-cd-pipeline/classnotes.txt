@@ -349,7 +349,7 @@ MSP-24:
     |--> helm repo add : adds a repo to local
     |--> rancher-latest : repo name
 
-* helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.clarusway.us \
+* helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.clww.us \
   --set tls=external --set replicas=1
     |--> installs rancher from the rancher-latest repo into cattle-system namespace by setting hostname=...., tls=..., replica=... 
 
@@ -377,7 +377,7 @@ MSP-25:
   one etcd plane host: failed to connect to the following etcd host(s)...), most probably the issue is related to
   certification. Rancher needs a TLS Certification to create functioning Kubernetes Clusters. You should issue your
   AWS Certification while creating the Application Loadbalancer for the rancher cluster. (domain name in the 
-  certification should be issued to a general subdomain name like "*.clarusway.us")
+  certification should be issued to a general subdomain name like "*.clww.us")
 
 
 MSP-28:

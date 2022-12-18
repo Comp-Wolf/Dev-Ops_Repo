@@ -23,7 +23,7 @@ This project aims to create full CI/CD Pipeline for microservice based applicati
 | Epic | Task  | Task #  | Task Definition   | Branch  |
 | ---   | :---  | ---                  | :---              | :---    |
 | Local Development Environment | Prepare Development Server Manually on EC2 Instance| MSP-1 | Prepare development server manually on Amazon Linux 2 for developers, enabled with `Docker` , `Docker-Compose` , `Java 11` , `Git` .  |
-| Local Development Environment | Prepare GitHub Repository for the Project | MSP-2-1 | Clone the Petclinic app from the Clarusway repository [Petclinic Microservices Application](https://github.com/clarusway/petclinic-microservices.git) |
+| Local Development Environment | Prepare GitHub Repository for the Project | MSP-2-1 | Clone the Petclinic app from the clww repository [Petclinic Microservices Application](https://github.com/clww/petclinic-microservices.git) |
 | Local Development Environment | Prepare GitHub Repository for the Project | MSP-2-2 | Prepare base branches namely `main` , `dev` , `release` for DevOps cycle. |
 | Local Development Environment | Check the Maven Build Setup on Dev Branch | MSP-3 | Check the Maven builds for `test` , `package` , and `install` phases on `dev` branch |
 | Local Development Environment | Prepare a Script for Packaging the Application | MSP-4 |  Prepare a script to package the application with Maven wrapper | feature/msp-4 |
@@ -81,10 +81,10 @@ newgrp docker
 
 ## MSP 2 - Prepare GitHub Repository for the Project
 
-* Connect to your Development Server via `ssh` and clone the petclinic app from the repository [Spring Petclinic Microservices App](https://github.com/clarusway/petclinic-microservices-with-db.git).
+* Connect to your Development Server via `ssh` and clone the petclinic app from the repository [Spring Petclinic Microservices App](https://github.com/clww/petclinic-microservices-with-db.git).
 
 ``` bash
-git clone https://github.com/clarusway/petclinic-microservices-with-db.git
+git clone https://github.com/clww/petclinic-microservices-with-db.git
 ```
 
 * Change your working directory to **petclinic-microservices** and delete the **.git** directory.
@@ -216,7 +216,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compo
 chmod +x /usr/local/bin/docker-compose
 yum install git -y
 yum install java-11-amazon-corretto -y
-git clone https://github.com/clarusway/petclinic-microservices.git
+git clone https://github.com/clww/petclinic-microservices.git
 cd petclinic-microservices
 git fetch
 git checkout dev
@@ -801,7 +801,7 @@ fn = 'Callahan' + str(random.randint(0, 100))
 fn_field.send_keys(fn)
 sleep(1)
 fn_field = driver.find_element_by_name('lastName')
-fn_field.send_keys('Clarusway')
+fn_field.send_keys('clww')
 sleep(1)
 fn_field = driver.find_element_by_name('address')
 fn_field.send_keys('Ridge Corp. Street')
@@ -1050,7 +1050,7 @@ git checkout feature/msp-14
   * Click `Add build step` under `Build` and select `Execute Shell`
 ``` bash
 PATH="$PATH:/usr/local/bin"
-APP_REPO_NAME="clarusway-repo/petclinic-app-dev"
+APP_REPO_NAME="clww-repo/petclinic-app-dev"
 AWS_REGION="us-east-1"
 
 aws ecr create-repository \
@@ -1066,7 +1066,7 @@ aws ecr create-repository \
 
 ``` bash
 PATH="$PATH:/usr/local/bin"
-APP_REPO_NAME="clarusway-repo/petclinic-app-dev"
+APP_REPO_NAME="clww-repo/petclinic-app-dev"
 AWS_REGION="us-east-1"
 
 aws ecr create-repository \
@@ -2566,7 +2566,7 @@ git push --set-upstream origin feature/msp-18
       * Write below script into the `Command`
         ```bash
         PATH="$PATH:/usr/local/bin"
-        APP_REPO_NAME="clarusway-repo/petclinic-app-dev1" # Write your own repo name
+        APP_REPO_NAME="clww-repo/petclinic-app-dev1" # Write your own repo name
         AWS_REGION="us-east-1" #Update this line if you work on another region
         ECR_REGISTRY="210785755454.dkr.ecr.us-east-1.amazonaws.com" # Replace this line with your ECR name
         aws ecr create-repository \
@@ -2720,7 +2720,7 @@ pipeline {
     environment {
         PATH=sh(script:"echo $PATH:/usr/local/bin", returnStdout:true).trim()
         APP_NAME="petclinic"
-        APP_REPO_NAME="clarusway-repo/${APP_NAME}-app-dev"
+        APP_REPO_NAME="clww-repo/${APP_NAME}-app-dev"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -3042,7 +3042,7 @@ git checkout feature/msp-20
 
 ```bash
 PATH="$PATH:/usr/local/bin"
-APP_REPO_NAME="clarusway-repo/petclinic-app-qa"
+APP_REPO_NAME="clww-repo/petclinic-app-qa"
 AWS_REGION="us-east-1"
 
 aws ecr create-repository \
@@ -3179,7 +3179,7 @@ git checkout feature/msp-21
 ```bash
 PATH="$PATH:/usr/local/bin"
 APP_NAME="petclinic"
-APP_REPO_NAME="clarusway-repo/petclinic-app-qa"
+APP_REPO_NAME="clww-repo/petclinic-app-qa"
 ANS_KEYPAIR="matt-${APP_NAME}-qa.key"
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 export AWS_REGION="us-east-1"
@@ -3239,7 +3239,7 @@ pipeline {
     environment {
         PATH=sh(script:"echo $PATH:/usr/local/bin", returnStdout:true).trim()
         APP_NAME="petclinic"
-        APP_REPO_NAME="clarusway-repo/petclinic-app-qa"
+        APP_REPO_NAME="clww-repo/petclinic-app-qa"
         ANS_KEYPAIR="matt-petclinic-qa.key"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
@@ -3552,7 +3552,7 @@ Target group        : `call-rancher-http-80-tg` target group
 
 * Configure ALB Listener of HTTP on `Port 80` to redirect traffic to HTTPS on `Port 443`.
 
-* Create DNS A record for `rancher.clarusway.us` and attach the `call-rancher-alb` application load balancer to it.
+* Create DNS A record for `rancher.clww.us` and attach the `call-rancher-alb` application load balancer to it.
 
 * Install RKE, the Rancher Kubernetes Engine, [Kubernetes distribution and command-line tool](https://rancher.com/docs/rke/latest/en/installation/)) on Jenkins Server.
 
@@ -3857,7 +3857,7 @@ Worker            : checked
 
 ``` bash
 PATH="$PATH:/usr/local/bin"
-APP_REPO_NAME="clarusway-repo/petclinic-app-staging"
+APP_REPO_NAME="clww-repo/petclinic-app-staging"
 AWS_REGION="us-east-1"
 
 aws ecr create-repository \
@@ -3952,7 +3952,7 @@ pipeline {
     environment {
         PATH=sh(script:"echo $PATH:/usr/local/bin", returnStdout:true).trim()
         APP_NAME="petclinic"
-        APP_REPO_NAME="clarusway-repo/petclinic-app-staging"
+        APP_REPO_NAME="clww-repo/petclinic-app-staging"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -4040,7 +4040,7 @@ pipeline {
 }
 ```
 
-* Create an `A` record of `staging-petclinic.clarusway.us` in your hosted zone (in our case `clarusway.us`) using AWS Route 53 domain registrar and bind it to your `petclinic cluster`.
+* Create an `A` record of `staging-petclinic.clww.us` in your hosted zone (in our case `clww.us`) using AWS Route 53 domain registrar and bind it to your `petclinic cluster`.
 
 * Commit the change, then push the script to the remote repo.
 
@@ -4076,7 +4076,7 @@ Worker            : checked
 
 ``` bash
 PATH="$PATH:/usr/local/bin"
-APP_REPO_NAME="clarusway-repo/petclinic-app-prod"
+APP_REPO_NAME="clww-repo/petclinic-app-prod"
 AWS_REGION="us-east-1"
 
 aws ecr create-repository \
@@ -4193,7 +4193,7 @@ pipeline {
     environment {
         PATH=sh(script:"echo $PATH:/usr/local/bin", returnStdout:true).trim()
         APP_NAME="petclinic"
-        APP_REPO_NAME="clarusway-repo/petclinic-app-prod"
+        APP_REPO_NAME="clww-repo/petclinic-app-prod"
         AWS_ACCOUNT_ID=sh(script:'export PATH="$PATH:/usr/local/bin" && aws sts get-caller-identity --query Account --output text', returnStdout:true).trim()
         AWS_REGION="us-east-1"
         ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
@@ -4310,11 +4310,11 @@ git branch feature/msp-29
 git checkout feature/msp-29
 ```
 
-* Create an `A` record of `petclinic.clarusway.us` in your hosted zone (in our case `clarusway.us`) using AWS Route 53 domain registrar and bind it to your `petclinic cluster`.
+* Create an `A` record of `petclinic.clww.us` in your hosted zone (in our case `clww.us`) using AWS Route 53 domain registrar and bind it to your `petclinic cluster`.
 
 * Check the website
 
-* Configure TLS(SSL) certificate for `petclinic.clarusway.us` using `cert-manager` on petclinic K8s cluster with the following steps.
+* Configure TLS(SSL) certificate for `petclinic.clww.us` using `cert-manager` on petclinic K8s cluster with the following steps.
 
 * Log into Jenkins Server and configure the `kubectl` to connect to petclinic cluster by getting the `Kubeconfig` file from Rancher and save it as `$HOME/.kube/config` or set `KUBECONFIG` environment variable.
 
@@ -4382,7 +4382,7 @@ spec:
     # The ACME server URL
     server: https://acme-v02.api.letsencrypt.org/directory
     # Email address used for ACME registration
-    email: callahan@clarusway.com
+    email: callahan@clww.com
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: letsencrypt-prod
@@ -4410,11 +4410,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - petclinic.clarusway.us
+    - petclinic.clww.us
     secretName: petclinic-tls
 ```
 
-* Check and verify that the TLS(SSL) certificate created and successfully issued to `petclinic.clarusway.us` by checking URL of `https://petclinic.clarusway.us`
+* Check and verify that the TLS(SSL) certificate created and successfully issued to `petclinic.clww.us` by checking URL of `https://petclinic.clww.us`
 
 * Commit the change, then push the tls script to the remote repo.
 

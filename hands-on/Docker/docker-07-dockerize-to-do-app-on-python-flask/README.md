@@ -60,8 +60,8 @@ app = Flask(__name__)
 
 # Configure mysql database
 app.config['MYSQL_DATABASE_HOST'] = 'database'
-app.config['MYSQL_DATABASE_USER'] = 'clarusway'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'Clarusway_1'
+app.config['MYSQL_DATABASE_USER'] = 'clww'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'clww_1'
 app.config['MYSQL_DATABASE_DB'] = 'todo_db'
 app.config['MYSQL_DATABASE_PORT'] = 3306
 mysql = MySQL()
@@ -272,8 +272,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: R1234r
             MYSQL_DATABASE: todo_db
-            MYSQL_USER: clarusway
-            MYSQL_PASSWORD: Clarusway_1
+            MYSQL_USER: clww
+            MYSQL_PASSWORD: clww_1
         networks:
             - clarusnet
     myapp:

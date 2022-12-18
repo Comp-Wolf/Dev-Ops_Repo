@@ -353,10 +353,10 @@ exit
 sudo ls /var/lib/docker/volumes/full-vol/_data
 ```
 
-- Run the `clarusway/hello-clarus` container with interactive shell open, name the container as `clarus`, and show the inside of `hello-clarus` directory.
+- Run the `clww/hello-clarus` container with interactive shell open, name the container as `clarus`, and show the inside of `hello-clarus` directory.
 
 ```bash
-docker run -it --name clarus clarusway/hello-clarus sh
+docker run -it --name clarus clww/hello-clarus sh
 / # ls
 bin           etc           home          media         opt           root          sbin          sys           usr
 dev           hello-clarus  lib           mnt           proc          run           srv           tmp           var
@@ -375,10 +375,10 @@ app.py
 
 ![situation 1 and 2](situation-1-and-2.png)
 
-- Run the `clarusways/hello-clarus` container with interactive shell open, name the container as `try1`, attach the volume `full-vol` to `/cw` mount point in the container, and show that `/cw` directory is created and files inside volume are copied to this directory.
+- Run the `clwws/hello-clarus` container with interactive shell open, name the container as `try1`, attach the volume `full-vol` to `/cw` mount point in the container, and show that `/cw` directory is created and files inside volume are copied to this directory.
 
 ```bash
-docker run -it --name try1 -v full-vol:/cw clarusway/hello-clarus sh
+docker run -it --name try1 -v full-vol:/cw clww/hello-clarus sh
 / # ls
 bin           dev           hello-clarus  lib           mnt           proc          run           srv           tmp           var
 cw            etc           home          media         opt           root          sbin          sys           usr
@@ -403,10 +403,10 @@ full.txt
 sudo ls /var/lib/docker/volumes/empty-vol/_data
 ```
 
-- Run the `clarusway/hello-clarus` container with interactive shell open, name the container as `try2`, attach the volume `empty-vol` to `/hello-clarus` mount point in the container.
+- Run the `clww/hello-clarus` container with interactive shell open, name the container as `try2`, attach the volume `empty-vol` to `/hello-clarus` mount point in the container.
 
 ```bash
-docker run -it --name try2 -v empty-vol:/hello-clarus clarusway/hello-clarus sh
+docker run -it --name try2 -v empty-vol:/hello-clarus clww/hello-clarus sh
 / # ls
 bin           etc           home          media         opt           root          sbin          sys           usr
 dev           hello-clarus  lib           mnt           proc          run           srv           tmp           var
@@ -438,10 +438,10 @@ sudo ls /var/lib/docker/volumes/full-vol/_data
 full.txt
 ```
 
-- Run the `clarusway/hello-clarus` container with interactive shell open, name the container as `try3`, attach the volume `full-vol` to `/hello-clarus` mount point in the container, and show that we just see the files inside volume regardless of  the target directory is full or empty.
+- Run the `clww/hello-clarus` container with interactive shell open, name the container as `try3`, attach the volume `full-vol` to `/hello-clarus` mount point in the container, and show that we just see the files inside volume regardless of  the target directory is full or empty.
 
 ```bash
-docker run -it --name try3 -v full-vol:/hello-clarus clarusway/hello-clarus sh
+docker run -it --name try3 -v full-vol:/hello-clarus clww/hello-clarus sh
 / # ls
 bin           etc           home          media         opt           root          sbin          sys           usr
 dev           hello-clarus  lib           mnt           proc          run           srv           tmp           var
@@ -493,7 +493,7 @@ root@4a1c7e5f394a:/usr/share/nginx/html# cat index.html
 
 ```bash
 mkdir webpage && cd webpage
-echo "<h1>Welcome to Clarusway</h1>" > index.html
+echo "<h1>Welcome to clww</h1>" > index.html
 ```
 
 - Run the `nginx` container at the detached mod, name the container as `nginx-new`, attach the directory `/home/ec2-user/webpage` to `/usr/share/nginx/html` mount point in the container, and open <public-ip> on browser and show the web page.
@@ -516,7 +516,7 @@ root@a7e3d276a147:/# cd usr/share/nginx/html
 root@a7e3d276a147:/usr/share/nginx/html# ls
 index.html
 root@a7e3d276a147:/usr/share/nginx/html# cat index.html
-<h1>Welcome to Clarusway</h1>
+<h1>Welcome to clww</h1>
 ```
 
 - `exit` the container.

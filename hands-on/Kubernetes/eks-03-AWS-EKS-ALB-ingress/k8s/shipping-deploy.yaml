@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: clarusway/clarusshop-shipping
+        image: clww/clarusshop-shipping
         ports:
         - containerPort: 80

@@ -53,10 +53,10 @@ At the end of the this hands-on training, students will be able to;
 
 ### Step-1: Prepare the Image Repository on ECR
 
-- Create a docker image repository `clarusway/to-do-app` on AWS ECR from Management Console.
+- Create a docker image repository `clww/to-do-app` on AWS ECR from Management Console.
 ```text
 Visibility settings     : Private
-Repository name         :  <your account ID>.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app
+Repository name         :  <your account ID>.dkr.ecr.us-east-1.amazonaws.com/clww/to-do-app
 Tag immutability        : Disable
 Image scan settings     : Disable
 Encryption settings     : Disable
@@ -187,7 +187,7 @@ pipeline {
     agent any
     environment {
         ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
-        APP_REPO_NAME= "clarusway/to-do-app"
+        APP_REPO_NAME= "clww/to-do-app"
     }
     stages {
         stage('Build Docker Image') {
@@ -252,7 +252,7 @@ aws ecr get-login-password --region us-east-1 | docker login --username AWS --pa
 - Then run the image
 
 ```bash
-docker run --name todo -dp 80:3000 191909428172.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest
+docker run --name todo -dp 80:3000 191909428172.dkr.ecr.us-east-1.amazonaws.com/clww/to-do-app:latest
 ```
 - Delete the container 
 
@@ -281,7 +281,7 @@ Press "i" to edit
     agent any
     environment {
         ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
-        APP_REPO_NAME= "clarusway/to-do-app"
+        APP_REPO_NAME= "clww/to-do-app"
         PATH="/usr/local/bin/:${env.PATH}"
     }
     stages {
@@ -346,7 +346,7 @@ aws ecs create-cluster --cluster-name to-do-app
 	"networkMode": "awsvpc",
 	"containerDefinitions": [{
 		"name": "to-do-app",
-		"image": "191909428172.dkr.ecr.us-east-1.amazonaws.com/clarusway/to-do-app:latest",
+		"image": "191909428172.dkr.ecr.us-east-1.amazonaws.com/clww/to-do-app:latest",
 		"portMappings": [{
 			"containerPort": 3000,
 			"protocol": "tcp"
@@ -389,7 +389,7 @@ pipeline {
     agent any
     environment {
         ECR_REGISTRY = "191909428172.dkr.ecr.us-east-1.amazonaws.com"
-        APP_REPO_NAME= "clarusway/to-do-app"
+        APP_REPO_NAME= "clww/to-do-app"
     }
     stages {
         stage('Build Docker Image') {
@@ -458,11 +458,11 @@ git push
 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 191909428172.dkr.ecr.us-east-1.amazonaws.com
 ```
 
-- Delete the ECR repository `clarusway-repo/todo-app` from AWS CLI.
+- Delete the ECR repository `clww-repo/todo-app` from AWS CLI.
 
 ```bash
 aws ecr delete-repository \
-      --repository-name clarusway/to-do-app \
+      --repository-name clww/to-do-app \
       --force \
       --region us-east-1
 ```

@@ -181,7 +181,7 @@ spec:
         app: todoapp
     spec:
       containers: 
-        - image: clarusway/todo
+        - image: clww/todo
           imagePullPolicy: Always
           name: myweb
           ports: 

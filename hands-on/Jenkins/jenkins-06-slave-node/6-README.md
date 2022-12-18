@@ -171,7 +171,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "Clarusway_Way to Reinvent Yourself"
+                echo "clww_Way to Reinvent Yourself"
                 sh 'echo second step'
                 sh 'echo another step'
                 sh 'sleep 10'

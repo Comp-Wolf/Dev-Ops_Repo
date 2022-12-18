@@ -136,7 +136,7 @@ vi tasks/main.yml
 
 - name: index.html
   copy:
-    content: "<h1>Hello Clarusway</h1>"
+    content: "<h1>Hello clww</h1>"
     dest: /var/www/html/index.html
 
 - name: restart apache2

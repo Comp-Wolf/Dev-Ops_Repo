@@ -2,15 +2,15 @@
 
 ## Description
 
-This project aims to create a Jenkins pipeline to deploy web-page written Nodejs and React Frameworks on AWS Cloud Infrastructure using Ansible. Building infrastructure process is managing with control node utilizing Ansible. This infrastructure has 1 jenkins server (`Amazon Linux 2 AMI`) as ansible control node and 3 EC2's as worker node (`Red Hat Enterprise Linux 8 with High Availability`). These EC2's will be launched on AWS console. Web-page has 3 main components which are postgresql, nodejs, and react. Each component is serving in Docker container on EC2s dedicated for them. Postgresql is serving as Database of web-page. Nodejs controls backend part of web-side and react controls frontend side of web-page. The code was written by Clarusway's Developers and architecture will be created by Clarusway's AWS & DevOps Team.
+This project aims to create a Jenkins pipeline to deploy web-page written Nodejs and React Frameworks on AWS Cloud Infrastructure using Ansible. Building infrastructure process is managing with control node utilizing Ansible. This infrastructure has 1 jenkins server (`Amazon Linux 2 AMI`) as ansible control node and 3 EC2's as worker node (`Red Hat Enterprise Linux 8 with High Availability`). These EC2's will be launched on AWS console. Web-page has 3 main components which are postgresql, nodejs, and react. Each component is serving in Docker container on EC2s dedicated for them. Postgresql is serving as Database of web-page. Nodejs controls backend part of web-side and react controls frontend side of web-page. The code was written by clww's Developers and architecture will be created by clww's AWS & DevOps Team.
 
 ## Problem Statement
 
 ![Project_007](ansible.png)
 
-- Clarusway has recently ended up a project that aims to serve as web page. You and your colleagues are assigned to work on this project. Clarusway Developer team has done with code and DevOps team is going to deploy the app in production environment using ansible.
+- clww has recently ended up a project that aims to serve as web page. You and your colleagues are assigned to work on this project. clww Developer team has done with code and DevOps team is going to deploy the app in production environment using ansible.
 
-- Application is coded by Clarusway Fullstack development team and given you as DevOps team. Web-page allows users to collect their infos. Registration data should be kept in separate PostgreSQL database located in one of EC2s. Nodejs framework controls backend and serves on port 5000, it is als connected to the PostgreSQL database on port 5432. React framework controls the frontend and it is also connected to the Nodejs server on port 5000. React server broadcasts web-page on port 3000. 
+- Application is coded by clww Fullstack development team and given you as DevOps team. Web-page allows users to collect their infos. Registration data should be kept in separate PostgreSQL database located in one of EC2s. Nodejs framework controls backend and serves on port 5000, it is als connected to the PostgreSQL database on port 5432. React framework controls the frontend and it is also connected to the Nodejs server on port 5000. React server broadcasts web-page on port 3000. 
 
 - The Web Application will be deployed using Nodejs and React framework.
 
@@ -20,7 +20,7 @@ This project aims to create a Jenkins pipeline to deploy web-page written Nodejs
 
 - The rest of the process has to be controlled with control node which is connected SSH port.
 
-- Codes written by Clarusway developers should be pulled from Clarusway Repo into the Jenkins server and sent them to the EC2's from here with Ansible.
+- Codes written by clww developers should be pulled from clww Repo into the Jenkins server and sent them to the EC2's from here with Ansible.
 
 - Postgresql, Nodejs and React parts has to be placed in docker container. 
 
@@ -104,7 +104,7 @@ In the architecture, you can configure your architecture with these conditions,
 ## Project Skeleton
 
 ```bash
-208:clarusway_jenkins_project (folder)
+208:clww_jenkins_project (folder)
 |
 |----Readme.md                  # Given to the students (Definition of the project)
 |----dockerfile-postgresql      # Given to the students

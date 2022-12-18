@@ -5,9 +5,9 @@ services:
       image: mysql:5.7
       environment:
           MYSQL_ROOT_PASSWORD   : R1234r
-          MYSQL_DATABASE        : clarusway_phonebook
+          MYSQL_DATABASE        : clww_phonebook
           MYSQL_USER            : admin
-          MYSQL_PASSWORD        : Clarusway_1
+          MYSQL_PASSWORD        : clww_1
           networks:
               - clarusnet
   myapp:
