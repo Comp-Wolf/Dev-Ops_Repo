@@ -2,7 +2,7 @@
 
 yum update
 yum install git -y
-git clone https://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@github.com/clarusway-aws-devops/project-207-Nihatcan17.git
+git clone https://xxxxxxxxxxxxxx@github.com/CLW-aws-devops/project-207-comp-wolf.git
 amazon-linux-extras install docker -y
 systemctl start docker
 systemctl enable docker
