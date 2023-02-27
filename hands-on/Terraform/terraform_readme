@@ -7,9 +7,9 @@ terraform komutları ve işlevleri
  ->   terraform init
     terraform validate
  ->   terraform plan
-    terraform apply -auto-approve
+    terraform apply -auto-approve   &   terraform apply -no-color
     terraform destroy -auto-approve
-*-* 
+*-*
 
 ## Part-1: Terraform Commands
 
