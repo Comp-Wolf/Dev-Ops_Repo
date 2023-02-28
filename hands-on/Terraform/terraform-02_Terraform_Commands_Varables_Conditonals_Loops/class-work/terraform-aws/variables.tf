@@ -1,5 +1,5 @@
 variable "ec2_name" {
-  default = "oliver-ec2"
+  default = "wolf-ec2"
 }
 
 variable "ec2_type" {
