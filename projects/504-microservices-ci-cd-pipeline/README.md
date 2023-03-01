@@ -646,7 +646,7 @@ public class PetTest {
 
 * Implement unit tests with maven wrapper for only `customer-service` microservice locally on `Dev Server`. Execute the following command under the `spring-petclinic-customers-service folder`.
 
-``` bash
+``` bash  # "bu adımı aradaki farkı görmek için yapıyoruz. yapmadan geçebiliriz."
 cd spring-petclinic-customers-service
 ../mvnw clean test
 ```
@@ -689,6 +689,7 @@ pom.xml nin 87. satırından sonrasına ekliyoruz.
 ``` bash
 cd spring-petclinic-customers-service
 ../mvnw test
+cd ..
 ```
 
 * Commit the change, then push the changes to the remote repo.
