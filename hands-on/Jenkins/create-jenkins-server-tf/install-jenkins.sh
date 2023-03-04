@@ -6,7 +6,7 @@ yum upgrade
 amazon-linux-extras install java-openjdk11 -y
 amazon-linux-extras install epel -y
 yum install jenkins -y
+yum install git -y
 systemctl enable jenkins
 systemctl start jenkins
 systemctl status jenkins
-yum install git -y
