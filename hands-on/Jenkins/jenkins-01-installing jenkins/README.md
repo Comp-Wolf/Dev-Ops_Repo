@@ -68,6 +68,7 @@ sudo amazon-linux-extras install epel -y
 
 ```bash
 sudo yum install jenkins -y
+sudo yum install git -y
 ```
 
 - Start Jenkins service.
