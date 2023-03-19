@@ -1,0 +1,11 @@
+region = ""
+mykey = ""
+tags = "rancher-kubernetes"
+myami = "ami-0778521d914d23bc1"
+instancetype = "t3a.medium" 
+secgrname =  "rancher-server-sec-gr-"
+domain-name = "" # *'li sertifika yoksa bu sekilde yazilacak
+rancher-subnet = "" # kubernetes.io/cluster/Petclinic-Rancher seklinde tagli olan subnet id alinacak
+hostedzone = "" # awscan.link seklinde yazilacak
+vpc-id = ""
+alb-tag = ""
