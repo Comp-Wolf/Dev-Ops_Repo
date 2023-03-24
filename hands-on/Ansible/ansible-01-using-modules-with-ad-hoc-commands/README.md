@@ -112,6 +112,7 @@ $ ansible all -m ping
 $ ansible comp-wolf -m ping
 $ ansible node1 -m ping
 ```
+  >> ansibl all -m ping komutu ile ansible ile bütün envanterimizdeki makinelere ping çalıştır diyoruz.
 - Explain the content of the output. 
 
 - Go back to the hosts file and change an ip address for showing the negative output.
