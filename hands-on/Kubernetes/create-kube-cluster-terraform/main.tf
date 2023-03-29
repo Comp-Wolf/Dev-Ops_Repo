@@ -16,11 +16,11 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 variable "key-name" {
-  default = "oliver"   # change here
+  default = "erdogan   # change here
 }
 
 locals {
-  name = "oliver"   # change here, optional
+  name = "erdogan   # change here, optional
 }
 
 resource "aws_instance" "master" {
