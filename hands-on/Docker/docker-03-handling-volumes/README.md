@@ -59,7 +59,10 @@ systemctl status docker
 ```bash
 docker run -it alpine ash
 ```
-## problem olursa
+## alphine ash --> yazmamızın nedeni aplhine de terminale girebilmek için "ash" yazmamız gerekiyor. Çünkü kendine özgü terminali "ash" dır.
+##
+
+## yukarıdaki komutta problem olursa
 newgrp docker
 sudo docker run -it alpine ash
 /// usermod -a -G docker ec2-user # ec2-user ı docker mod a ekledik.
@@ -89,6 +92,7 @@ exit
 - Show the list of all containers available on Docker machine.
 
 ```bash
+newgrp docker
 docker ps -a
 ```
 
@@ -155,7 +159,6 @@ docker volume inspect cw-vol
 ```bash
 sudo ls -al  /var/lib/docker/volumes/cw-vol/_data
 ```
-
 - Run a `alpine` container with interactive shell open, name the container as `clarus`, attach the volume `cw-vol` to `/cw` mount point in the container, and add command to run alpine shell. Here, explain `--volume` and `v` flags.
 
 ```bash
