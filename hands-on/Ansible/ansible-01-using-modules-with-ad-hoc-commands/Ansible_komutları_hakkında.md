@@ -18,7 +18,7 @@
 -->$ ansible comp-wolf webservers -a 'lsblk'
 <<listelenen blok storujları gösterir>>
 
-->
+-->
 
 ->
 
